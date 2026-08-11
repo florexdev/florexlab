@@ -66,9 +66,11 @@
       link.classList.toggle('active', link.getAttribute('data-route') === route);
     });
 
-    // Update hash
-    if (window.location.hash !== `#${route}`) {
-      history.pushState(null, '', `#${route}`);
+    // Keep URL clean without #hash tags
+    if (window.location.hash) {
+      try {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      } catch (err) { /* ignore */ }
     }
 
     // Scroll to top
