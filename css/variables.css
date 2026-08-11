@@ -1,0 +1,189 @@
+/* ==========================================================================
+   FLOREX.LAB — Design Tokens (Retro Palette Edition)
+   CSS Custom Properties for the Retro Developer Aesthetics
+   ========================================================================== */
+
+:root {
+  /* ── Retro Palette (Extracted from prompt image) ── */
+  --retro-red: #ea4335;
+  --retro-orange: #ff7a29;
+  --retro-yellow: #ffc13b;
+  --retro-lime: #b5c437;
+  --retro-green: #8bc386;
+  --retro-teal: #85b2a5;
+  --retro-pink: #d88ba2;
+
+  /* ── Dark Theme (Warm Gruvbox / Retro Dark) ── */
+  --bg-primary: #1e1e1d;
+  --bg-secondary: #161615;
+  --bg-tertiary: #252524;
+  --surface: #282827;
+  --surface-hover: #323230;
+  --surface-active: #3c3c3a;
+  --surface-elevated: #2d2d2b;
+
+  /* ── Text (Warm retro cream) ── */
+  --text-primary: #fbf1c7;
+  --text-secondary: #d5c4a1;
+  --text-muted: #928374;
+  --text-inverse: #1e1e1d;
+
+  /* ── Accents mapped to Retro Palette ── */
+  --accent-red: var(--retro-red);
+  --accent-red-soft: rgba(234, 67, 53, 0.15);
+  --accent-red-glow: rgba(234, 67, 53, 0.4);
+
+  --accent-orange: var(--retro-orange);
+  --accent-orange-soft: rgba(255, 122, 41, 0.15);
+
+  --accent-yellow: var(--retro-yellow);
+  --accent-yellow-soft: rgba(255, 193, 59, 0.15);
+
+  --accent-lime: var(--retro-lime);
+  --accent-lime-soft: rgba(181, 196, 55, 0.15);
+
+  --accent-blue: var(--retro-teal);
+  --accent-blue-soft: rgba(133, 178, 165, 0.15);
+  --accent-blue-glow: rgba(133, 178, 165, 0.4);
+
+  --accent-green: var(--retro-green);
+  --accent-green-soft: rgba(139, 195, 134, 0.15);
+
+  --accent-purple: var(--retro-pink);
+  --accent-purple-soft: rgba(216, 139, 162, 0.15);
+
+  --accent-cyan: var(--retro-teal);
+  --accent-cyan-soft: rgba(133, 178, 165, 0.15);
+
+  /* ── Gradients ── */
+  --gradient-primary: linear-gradient(135deg, var(--retro-red), var(--retro-orange), var(--retro-yellow));
+  --gradient-subtle: linear-gradient(135deg, rgba(234, 67, 53, 0.08), rgba(133, 178, 165, 0.08));
+  --gradient-glow: linear-gradient(135deg, var(--accent-red-glow), var(--accent-blue-glow));
+  --gradient-surface: linear-gradient(180deg, var(--surface), var(--bg-secondary));
+  --gradient-retro-stripe: linear-gradient(90deg, #ea4335, #ff7a29, #ffc13b, #b5c437, #8bc386, #85b2a5, #d88ba2);
+
+  /* ── Borders ── */
+  --border: rgba(251, 241, 199, 0.08);
+  --border-subtle: rgba(251, 241, 199, 0.04);
+  --border-hover: rgba(251, 241, 199, 0.16);
+  --border-accent: rgba(234, 67, 53, 0.4);
+
+  /* ── Radius (Slightly crisper for retro feel) ── */
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-glow-red: 0 0 20px rgba(234, 67, 53, 0.2);
+  --shadow-glow-blue: 0 0 20px rgba(133, 178, 165, 0.2);
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.5rem;
+  --text-6xl: 4.5rem;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ── Layout ── */
+  --container-max: 1280px;
+  --container-narrow: 960px;
+  --navbar-height: 64px;
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ── Z-index ── */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 900;
+  --z-modal: 1000;
+  --z-command-palette: 1100;
+  --z-toast: 1200;
+  --z-tooltip: 1300;
+}
+
+/* ── Light Theme (Retro Warm Parchment / Cream) ── */
+[data-theme="light"] {
+  --bg-primary: #fbf4e2;
+  --bg-secondary: #f3ebd5;
+  --bg-tertiary: #ebdcc3;
+  --surface: #ffffff;
+  --surface-hover: #f7f0df;
+  --surface-active: #eee5d2;
+  --surface-elevated: #ffffff;
+
+  --text-primary: #282827;
+  --text-secondary: #504945;
+  --text-muted: #7c6f64;
+  --text-inverse: #fbf4e2;
+
+  --accent-red: #d63022;
+  --accent-red-soft: rgba(214, 48, 34, 0.1);
+  --accent-red-glow: rgba(214, 48, 34, 0.2);
+
+  --accent-orange: #af3a03;
+  --accent-yellow: #b57614;
+  --accent-lime: #79740e;
+  --accent-blue: #076678;
+  --accent-blue-soft: rgba(7, 102, 120, 0.1);
+  --accent-green: #427b58;
+  --accent-purple: #8f3f71;
+  --accent-cyan: #076678;
+
+  --gradient-subtle: linear-gradient(135deg, rgba(214, 48, 34, 0.05), rgba(7, 102, 120, 0.05));
+
+  --border: rgba(40, 40, 39, 0.12);
+  --border-subtle: rgba(40, 40, 39, 0.06);
+  --border-hover: rgba(40, 40, 39, 0.25);
+  --border-accent: rgba(214, 48, 34, 0.3);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-glow-red: 0 0 20px rgba(214, 48, 34, 0.1);
+  --shadow-glow-blue: 0 0 20px rgba(7, 102, 120, 0.1);
+}
