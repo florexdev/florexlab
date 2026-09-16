@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Navigation
-   Navbar scroll behavior, hamburger menu, routing, active states
-   ========================================================================== */
+/* florex lab navigasyon navbar kaydirma davranisi hamburger menu yonlendirme aktif durumlar */
 
 (function() {
   'use strict';
@@ -11,7 +8,7 @@
   const mobileNav = document.getElementById('mobile-nav');
   let currentRoute = 'home';
 
-  /* ── Scroll-based navbar styling ── */
+  /* kaydirmaya dayali navbar stili */
   function handleScroll() {
     if (!navbar) return;
     if (window.scrollY > 20) {
@@ -21,7 +18,7 @@
     }
   }
 
-  /* ── Hamburger toggle ── */
+  /* hamburger ac kapa */
   function toggleMobileNav() {
     const isOpen = mobileNav.classList.contains('open');
 
@@ -46,58 +43,48 @@
     document.body.classList.remove('scroll-locked');
   }
 
-  /* ── Routing ── */
+  /* yonlendirme */
   function navigateTo(route) {
     if (!route) return;
 
-    // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
       section.classList.remove('active');
     });
 
-    // Show target section
     const targetSection = document.getElementById(`section-${route}`);
     if (targetSection) {
       targetSection.classList.add('active');
     }
 
-    // Update nav links
     document.querySelectorAll('.nav-link').forEach(link => {
       link.classList.toggle('active', link.getAttribute('data-route') === route);
     });
 
-    // Keep URL clean without #hash tags
     if (window.location.hash) {
       try {
         history.replaceState(null, '', window.location.pathname + window.location.search);
-      } catch (err) { /* ignore */ }
+      } catch (err) {  }
     }
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     currentRoute = route;
 
-    // Close mobile nav if open
     closeMobileNav();
 
-    // Show/hide footer (always show except in experiment viewer)
     const footer = document.getElementById('site-footer');
     if (footer) {
       footer.style.display = '';
     }
 
-    // Trigger scroll reveal for newly visible section
     setTimeout(() => {
       FLX.initScrollReveal();
     }, 50);
 
-    // If navigating to experiments, close any open viewer
     if (route === 'experiments' && FLX.experiments) {
       FLX.experiments.closeViewer();
     }
 
-    // If navigating to editor, init the code editor
     if (route === 'editor' && FLX.codeEditor) {
       FLX.codeEditor.init();
     }
@@ -109,18 +96,16 @@
     return validRoutes.includes(hash) ? hash : 'home';
   }
 
-  /* ── Init ── */
+  /* baslat */
   function init() {
-    // Scroll listener (throttled)
+
     window.addEventListener('scroll', FLX.throttle(handleScroll, 50), { passive: true });
     handleScroll(); // Initial check
 
-    // Hamburger
     if (hamburger) {
       hamburger.addEventListener('click', toggleMobileNav);
     }
 
-    // Nav link clicks (both desktop and mobile)
     document.querySelectorAll('[data-route]').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -129,7 +114,6 @@
       });
     });
 
-    // Logo click
     const logo = document.getElementById('nav-logo');
     if (logo) {
       logo.addEventListener('click', (e) => {
@@ -138,22 +122,18 @@
       });
     }
 
-    // Handle browser back/forward
     window.addEventListener('popstate', () => {
       navigateTo(getRouteFromHash());
     });
 
-    // Initial route
     navigateTo(getRouteFromHash());
 
-    // Close mobile nav on escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
         closeMobileNav();
       }
     });
 
-    // Close mobile nav on resize to desktop
     window.addEventListener('resize', FLX.debounce(() => {
       if (window.innerWidth > 768 && mobileNav.classList.contains('open')) {
         closeMobileNav();
@@ -161,7 +141,6 @@
     }, 150));
   }
 
-  // Expose
   FLX.navigate = navigateTo;
   FLX.navigation = { init, getCurrentRoute: () => currentRoute };
 

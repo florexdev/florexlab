@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Toast Notification System
-   Stackable toast notifications with types and auto-dismiss
-   ========================================================================== */
+/* florex lab bildirim sistemi turleri ve otomatik kapanmasi olan ust uste eklenebilir bildirimler */
 
 (function() {
   'use strict';
@@ -35,17 +32,14 @@
       ${duration > 0 ? `<div class="toast-progress" style="animation-duration:${duration}ms;"></div>` : ''}
     `;
 
-    // Close button
     toast.querySelector('.toast-close').addEventListener('click', () => dismiss(toast));
 
     container.appendChild(toast);
 
-    // Auto-dismiss
     if (duration > 0) {
       setTimeout(() => dismiss(toast), duration);
     }
 
-    // Limit visible toasts
     const toasts = container.querySelectorAll('.toast');
     if (toasts.length > 5) {
       dismiss(toasts[0]);

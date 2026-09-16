@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Playground Tools
-   Six interactive CSS generators with real-time preview and copyable output
-   ========================================================================== */
+/* florex lab oyun alani araclari gercek zamanli onizleme ve kopyalanabilir cikti ile alti interaktif css uretici */
 
 (function() {
   'use strict';
@@ -101,7 +98,7 @@
       }
     },
 
-    // ── Color Playground ──
+    // ── Color Oyun Alanı ──
     {
       name: 'Color Playground',
       description: 'Pick colors and convert between HEX, RGB, and HSL.',
@@ -122,11 +119,11 @@
             </div>
           </div>
         `;
-        return `/* ${hex} */\ncolor: ${hex};\ncolor: rgb(${rgb.r}, ${rgb.g}, ${rgb.b});\ncolor: hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%);`;
+        return `\ncolor: ${hex};\ncolor: rgb(${rgb.r}, ${rgb.g}, ${rgb.b});\ncolor: hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%);`;
       }
     },
 
-    // ── Animation Playground ──
+    // ── Animation Oyun Alanı ──
     {
       name: 'Animation Playground',
       description: 'Experiment with CSS animation keyframes, timing curves, and duration.',
@@ -149,7 +146,7 @@
             </button>
           </div>
         `;
-        return `animation: ${animation} ${duration}s ${easing} ${delay}s ${iterVal};\n\n/* Keyframe animation: ${animation} */`;
+        return `animation: ${animation} ${duration}s ${easing} ${delay}s ${iterVal};\n\n`;
       }
     },
 
@@ -252,7 +249,7 @@
     'Text Shadow Generator': { name: 'Metin Gölgesi Jeneratörü', desc: 'Metin gölgeleri oluşturmak için görsel araç.' }
   };
 
-  /* ── Render All Tools ── */
+  /* tum araclari olustur */
   function render() {
     container.innerHTML = '';
     const isTR = window.FLX && FLX.i18n && FLX.i18n.getCurrentLang() === 'tr';
@@ -289,7 +286,6 @@
 
       container.appendChild(toolEl);
 
-      // Render controls
       const controlsEl = toolEl.querySelector(`#pg-controls-${index}`);
       tool.controls.forEach(ctrl => {
         const group = document.createElement('div');
@@ -338,7 +334,6 @@
         }
       });
 
-      // Initial render
       updateTool(tool, previewId, outputId, state);
     });
 

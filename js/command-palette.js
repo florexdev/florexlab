@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Command Palette
-   Ctrl+K / Cmd+K triggered command palette with keyboard navigation
-   ========================================================================== */
+/* florex lab komut paleti ctrl k cmd k tetiklenen komut paleti klavye yonlendirmeli */
 
 (function() {
   'use strict';
@@ -15,9 +12,9 @@
   let focusedIndex = -1;
   let filteredItems = [];
 
-  /* ── Command Items ── */
+  /* komut ogeleri */
   const commands = [
-    // Navigation
+
     { id: 'nav-home', label: 'Home', group: 'Navigation', icon: 'home', action: () => FLX.navigate('home') },
     { id: 'nav-experiments', label: 'Experiments', group: 'Navigation', icon: 'zap', action: () => FLX.navigate('experiments') },
     { id: 'nav-components', label: 'Components', group: 'Navigation', icon: 'layout', action: () => FLX.navigate('components') },
@@ -25,15 +22,12 @@
     { id: 'nav-editor', label: 'Code Editor', group: 'Navigation', icon: 'code', action: () => FLX.navigate('editor') },
     { id: 'nav-about', label: 'About', group: 'Navigation', icon: 'info', action: () => FLX.navigate('about') },
 
-    // Actions
     { id: 'action-theme', label: 'Toggle Theme', group: 'Actions', icon: 'moon', action: () => FLX.theme.toggle() },
 
-    // Links
     { id: 'link-github', label: 'GitHub', group: 'Links', icon: 'github', action: () => window.open('https://github.com/florexdev', '_blank') },
     { id: 'link-portfolio', label: 'Portfolio', group: 'Links', icon: 'external', action: () => window.open('https://florexdev.com.tr', '_blank') },
     { id: 'link-blog', label: 'Blog', group: 'Links', icon: 'external', action: () => window.open('https://blog.florexdev.com.tr', '_blank') },
 
-    // Experiments (populated dynamically)
   ];
 
   function getExperimentCommands() {
@@ -79,7 +73,6 @@
       return;
     }
 
-    // Group items
     const groups = {};
     items.forEach(item => {
       if (!groups[item.group]) groups[item.group] = [];
@@ -106,7 +99,6 @@
 
     results.innerHTML = html;
 
-    // Click handlers
     results.querySelectorAll('.command-palette-item').forEach(el => {
       el.addEventListener('click', () => {
         const idx = parseInt(el.getAttribute('data-index'));
@@ -135,7 +127,7 @@
     }
   }
 
-  /* ── Open/Close ── */
+  /* ac kapat */
   function open() {
     if (isOpen) return;
     isOpen = true;
@@ -163,11 +155,11 @@
     document.body.classList.remove('scroll-locked');
   }
 
-  /* ── Init ── */
+  /* baslat */
   function init() {
-    // Keyboard shortcut
+
     document.addEventListener('keydown', (e) => {
-      // Ctrl+K or Cmd+K
+
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         isOpen ? close() : open();
@@ -195,19 +187,16 @@
       }
     });
 
-    // Search input
     if (input) {
       input.addEventListener('input', FLX.debounce((e) => {
         renderResults(filterCommands(e.target.value));
       }, 100));
     }
 
-    // Backdrop click
     if (backdrop) {
       backdrop.addEventListener('click', close);
     }
 
-    // Trigger button
     if (trigger) {
       trigger.addEventListener('click', open);
     }

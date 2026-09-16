@@ -1,19 +1,16 @@
-/* ==========================================================================
-   FLOREX.LAB — Live Code Editor
-   HTML / CSS / JS editor with live preview, console output, templates
-   ========================================================================== */
+/* florex lab canli kod editoru html css js canli onizleme konsol ciktisi sablonlar */
 
 (function () {
   'use strict';
 
-  /* ── State ── */
+  /* durum */
   let activeTab = 'html';
   let layoutMode = 'horizontal'; // horizontal | vertical
   let autoRun = true;
   let runTimer = null;
   const RUN_DELAY = 400;
 
-  /* ── Default code ── */
+  /* varsayilan kod */
   const defaultCode = {
     html: `<div class="demo-container">
   <h1 class="demo-title">Merhaba Dünya! 👋</h1>
@@ -78,7 +75,7 @@
 }`
   };
 
-  /* ── Templates ── */
+  /* sablonlar */
   const templates = [
     {
       id: 'blank',
@@ -275,7 +272,6 @@ function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   particles.forEach(p => { p.update(); p.draw(); });
 
-  // Draw connections
   ctx.globalAlpha = 0.1;
   ctx.strokeStyle = '#85b2a5';
   for (let i = 0; i < particles.length; i++) {
@@ -297,27 +293,27 @@ animate();`
     }
   ];
 
-  /* ── Current code state ── */
+  /* guncel kod durumu */
   let code = {
     html: defaultCode.html,
     css: defaultCode.css,
     js: defaultCode.js
   };
 
-  /* ── Console capture ── */
+  /* konsol yakalama */
   let consoleMessages = [];
   let messageListenerBound = false;
 
-  /* ── DOM References ── */
+  /* dom referanslari */
   function $(id) { return document.getElementById(id); }
 
-  /* ── Get translated template name ── */
+  /* cevrilmis sablon adini al */
   function getTemplateName(tpl) {
     const lang = FLX.i18n ? FLX.i18n.getCurrentLang() : 'tr';
     return tpl.name[lang] || tpl.name.en;
   }
 
-  /* ── Build Preview HTML ── */
+  /* onizleme html olustur */
   function buildPreviewHTML() {
     return `<!DOCTYPE html>
 <html>
@@ -330,7 +326,7 @@ animate();`
 <body>
 ${code.html}
 <script>
-// Console capture bridge
+
 (function(){
   const origLog = console.log;
   const origWarn = console.warn;
@@ -365,7 +361,7 @@ ${code.html}
 </html>`;
   }
 
-  /* ── Run Preview ── */
+  /* onizleme calistir */
   function runPreview() {
     const iframe = $('ce-preview-frame');
     if (!iframe) return;
@@ -376,7 +372,6 @@ ${code.html}
     const blob = new Blob([buildPreviewHTML()], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
 
-    // Revoke old URL
     if (iframe._blobUrl) {
       URL.revokeObjectURL(iframe._blobUrl);
     }
@@ -390,7 +385,7 @@ ${code.html}
     runTimer = setTimeout(runPreview, RUN_DELAY);
   }
 
-  /* ── Console ── */
+  /* konsol */
   function renderConsole() {
     const consoleEl = $('ce-console-output');
     if (!consoleEl) return;
@@ -410,25 +405,23 @@ ${code.html}
     consoleEl.scrollTop = consoleEl.scrollHeight;
   }
 
-  /* ── Tab Switching ── */
+  /* sekme degistirme */
   function switchTab(tab) {
     activeTab = tab;
 
-    // Update tab buttons
     document.querySelectorAll('.ce-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
     });
 
-    // Update editor content
     const textarea = $('ce-code-textarea');
     if (textarea) {
       textarea.value = code[tab];
-      // Update line numbers
+
       updateLineNumbers();
     }
   }
 
-  /* ── Line Numbers ── */
+  /* satir numaralari */
   function updateLineNumbers() {
     const textarea = $('ce-code-textarea');
     const lineNumbers = $('ce-line-numbers');
@@ -442,7 +435,7 @@ ${code.html}
     lineNumbers.innerHTML = html;
   }
 
-  /* ── Sync scroll between line numbers and textarea ── */
+  /* satir numaralari ve metin alani arasinda kaydirma senkronizasyonu */
   function syncScroll() {
     const textarea = $('ce-code-textarea');
     const lineNumbers = $('ce-line-numbers');
@@ -451,7 +444,7 @@ ${code.html}
     }
   }
 
-  /* ── Layout Toggle ── */
+  /* duzen degistir */
   function toggleLayout() {
     const editor = $('ce-editor-wrapper');
     if (!editor) return;
@@ -459,14 +452,13 @@ ${code.html}
     layoutMode = layoutMode === 'horizontal' ? 'vertical' : 'horizontal';
     editor.setAttribute('data-layout', layoutMode);
 
-    // Update button icon
     const btn = $('ce-layout-toggle');
     if (btn) {
       btn.setAttribute('title', layoutMode === 'horizontal' ? 'Dikey Düzen' : 'Yatay Düzen');
     }
   }
 
-  /* ── Load Template ── */
+  /* sablon yukle */
   function loadTemplate(templateId) {
     const tpl = templates.find(t => t.id === templateId);
     if (!tpl) return;
@@ -478,7 +470,6 @@ ${code.html}
     switchTab(activeTab);
     runPreview();
 
-    // Close dropdown
     const dropdown = $('ce-template-dropdown');
     if (dropdown) dropdown.classList.remove('open');
 
@@ -492,9 +483,9 @@ ${code.html}
     }
   }
 
-  /* ── Copy Code ── */
+  /* kodu kopyala */
   function copyAllCode() {
-    const fullCode = `<!-- HTML -->\n${code.html}\n\n/* CSS */\n${code.css}\n\n// JavaScript\n${code.js}`;
+    const fullCode = `<!-- HTML -->\n${code.html}\n\n\n${code.css}\n\n// JavaScript\n${code.js}`;
     navigator.clipboard.writeText(fullCode).then(() => {
       if (FLX.toast) {
         FLX.toast.show({
@@ -514,7 +505,7 @@ ${code.html}
     });
   }
 
-  /* ── Download as HTML ── */
+  /* html olarak indir */
   function downloadCode() {
     const fullHTML = buildPreviewHTML();
     const blob = new Blob([fullHTML], { type: 'text/html' });
@@ -535,13 +526,13 @@ ${code.html}
     }
   }
 
-  /* ── Clear Console ── */
+  /* konsolu temizle */
   function clearConsole() {
     consoleMessages = [];
     renderConsole();
   }
 
-  /* ── Handle Tab key in textarea ── */
+  /* metin alaninda sekme tusunu yonet */
   function handleTabKey(e) {
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -551,12 +542,11 @@ ${code.html}
       textarea.value = textarea.value.substring(0, start) + '  ' + textarea.value.substring(end);
       textarea.selectionStart = textarea.selectionEnd = start + 2;
 
-      // Trigger input event
       textarea.dispatchEvent(new Event('input'));
     }
   }
 
-  /* ── Render the editor section content ── */
+  /* editor bolum icerigini olustur */
   function renderEditor() {
     const container = $('code-editor-content');
     if (!container) return;
@@ -688,14 +678,13 @@ ${code.html}
     runPreview();
   }
 
-  /* ── Bind all events ── */
+  /* tum olaylari bagla */
   function bindEvents() {
-    // Tab clicks
+
     document.querySelectorAll('.ce-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
     });
 
-    // Textarea input
     const textarea = $('ce-code-textarea');
     if (textarea) {
       textarea.addEventListener('input', (e) => {
@@ -706,7 +695,6 @@ ${code.html}
       textarea.addEventListener('scroll', syncScroll);
       textarea.addEventListener('keydown', handleTabKey);
 
-      // Ctrl+Enter to run
       textarea.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
           e.preventDefault();
@@ -715,27 +703,21 @@ ${code.html}
       });
     }
 
-    // Run button
     const runBtn = $('ce-run-btn');
     if (runBtn) runBtn.addEventListener('click', runPreview);
 
-    // Copy button
     const copyBtn = $('ce-copy-btn');
     if (copyBtn) copyBtn.addEventListener('click', copyAllCode);
 
-    // Download button
     const downloadBtn = $('ce-download-btn');
     if (downloadBtn) downloadBtn.addEventListener('click', downloadCode);
 
-    // Layout toggle
     const layoutBtn = $('ce-layout-toggle');
     if (layoutBtn) layoutBtn.addEventListener('click', toggleLayout);
 
-    // Console clear
     const clearBtn = $('ce-console-clear');
     if (clearBtn) clearBtn.addEventListener('click', clearConsole);
 
-    // Auto-run toggle
     const autoRunToggle = $('ce-auto-run-toggle');
     if (autoRunToggle) {
       autoRunToggle.addEventListener('change', (e) => {
@@ -743,7 +725,6 @@ ${code.html}
       });
     }
 
-    // Template selector
     const templateBtn = $('ce-template-btn');
     const templateDropdown = $('ce-template-dropdown');
     if (templateBtn && templateDropdown) {
@@ -752,26 +733,23 @@ ${code.html}
         templateDropdown.classList.toggle('open');
       });
 
-      // Close dropdown on outside click
       document.addEventListener('click', () => {
         templateDropdown.classList.remove('open');
       });
       templateDropdown.addEventListener('click', (e) => e.stopPropagation());
     }
 
-    // Template items
     document.querySelectorAll('.ce-template-item').forEach(item => {
       item.addEventListener('click', () => {
         loadTemplate(item.getAttribute('data-template'));
       });
     });
 
-    // Console message listener (bind only once)
     if (!messageListenerBound) {
       messageListenerBound = true;
       window.addEventListener('message', (e) => {
         if (e.data && e.data.type === 'console') {
-          // Verify source is our preview iframe
+
           const iframe = $('ce-preview-frame');
           if (iframe && e.source === iframe.contentWindow) {
             consoleMessages.push({ level: e.data.level, data: e.data.data });
@@ -782,11 +760,10 @@ ${code.html}
       });
     }
 
-    // Resize handle
     initResize();
   }
 
-  /* ── Resizable Panels ── */
+  /* boyutlandirilabilir paneller */
   function initResize() {
     const handle = $('ce-resize-handle');
     const wrapper = $('ce-editor-wrapper');
@@ -826,12 +803,12 @@ ${code.html}
     });
   }
 
-  /* ── Init ── */
+  /* baslat */
   function init() {
     renderEditor();
   }
 
-  /* ── Expose ── */
+  /* disari aktar */
   FLX.codeEditor = { init };
 
 })();

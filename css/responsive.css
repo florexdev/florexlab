@@ -1,9 +1,6 @@
-/* ==========================================================================
-   FLOREX.LAB — Responsive
-   Breakpoints: 1200px, 992px, 768px, 576px, 375px
-   ========================================================================== */
+/* florex lab responsive breakpoints 1200px 992px 768px 576px 375px */
 
-/* ── Large Desktop (<= 1200px) ── */
+/* large desktop 1200px */
 @media (max-width: 1200px) {
   .hero-title {
     font-size: clamp(2.5rem, 7vw, 3.5rem);
@@ -22,7 +19,7 @@
   }
 }
 
-/* ── Tablet (<= 992px) ── */
+/* tablet 992px */
 @media (max-width: 992px) {
   .section {
     padding: var(--space-16) 0;
@@ -49,7 +46,7 @@
   }
 }
 
-/* ── Mobile landscape / small tablet (<= 768px) ── */
+/* mobile landscape small tablet 768px */
 @media (max-width: 768px) {
   :root {
     --navbar-height: 56px;
@@ -59,7 +56,6 @@
     padding: 0 var(--space-4);
   }
 
-  /* Navbar */
   .navbar-nav {
     display: none;
   }
@@ -80,7 +76,6 @@
     display: none;
   }
 
-  /* Hero */
   .hero {
     min-height: 90vh;
     padding-top: calc(var(--navbar-height) + var(--space-12));
@@ -119,7 +114,6 @@
     height: 300px;
   }
 
-  /* Grids */
   .experiment-grid {
     grid-template-columns: 1fr;
     gap: var(--space-4);
@@ -130,7 +124,6 @@
     gap: var(--space-4);
   }
 
-  /* Filter bar */
   .filter-bar {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -145,7 +138,6 @@
     display: none;
   }
 
-  /* Section header */
   .section-header h2 {
     font-size: var(--text-2xl);
   }
@@ -154,7 +146,6 @@
     font-size: var(--text-base);
   }
 
-  /* Experiment viewer */
   .experiment-viewer-header {
     flex-direction: column;
     align-items: flex-start;
@@ -172,7 +163,6 @@
     min-height: 250px;
   }
 
-  /* Footer */
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -188,7 +178,6 @@
     align-items: flex-start;
   }
 
-  /* Toast */
   .toast-container {
     left: var(--space-4);
     right: var(--space-4);
@@ -201,7 +190,6 @@
     width: 100%;
   }
 
-  /* Command palette */
   .command-palette {
     top: 10%;
     max-width: none;
@@ -209,7 +197,6 @@
     max-height: 70vh;
   }
 
-  /* Component preview */
   .component-preview {
     padding: var(--space-6);
   }
@@ -220,7 +207,6 @@
     gap: var(--space-2);
   }
 
-  /* Modal */
   .modal {
     max-width: none;
     width: calc(100% - var(--space-6));
@@ -228,7 +214,7 @@
   }
 }
 
-/* ── Mobile portrait (<= 576px) ── */
+/* mobile portrait 576px */
 @media (max-width: 576px) {
   .section {
     padding: var(--space-12) 0;
@@ -284,7 +270,7 @@
   }
 }
 
-/* ── Small mobile (<= 375px) ── */
+/* small mobile 375px */
 @media (max-width: 375px) {
   .container {
     padding: 0 var(--space-3);
@@ -318,7 +304,7 @@
   }
 }
 
-/* ── Large screens (>= 1440px) ── */
+/* large screens 1440px */
 @media (min-width: 1440px) {
   .container {
     padding: 0 var(--space-10);

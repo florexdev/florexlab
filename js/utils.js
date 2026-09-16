@@ -1,18 +1,15 @@
-/* ==========================================================================
-   FLOREX.LAB — Utilities
-   Shared helper functions used across the application
-   ========================================================================== */
+/* florex lab araclar uygulama genelinde kullanilan paylasilan yardimci fonksiyonlar */
 
 const FLX = window.FLX || {};
 
-/* ── Copy to Clipboard ── */
+/* panoya kopyala */
 FLX.copyToClipboard = async function(text) {
   try {
     await navigator.clipboard.writeText(text);
     FLX.toast.show({ message: 'Copied to clipboard', type: 'success', duration: 2000 });
     return true;
   } catch {
-    // Fallback for older browsers
+
     const textarea = document.createElement('textarea');
     textarea.value = text;
     textarea.style.position = 'fixed';
@@ -32,7 +29,7 @@ FLX.copyToClipboard = async function(text) {
   }
 };
 
-/* ── Debounce ── */
+/* geciktirme */
 FLX.debounce = function(fn, delay = 250) {
   let timer;
   return function(...args) {
@@ -41,7 +38,7 @@ FLX.debounce = function(fn, delay = 250) {
   };
 };
 
-/* ── Throttle ── */
+/* kisitlama */
 FLX.throttle = function(fn, limit = 100) {
   let inThrottle;
   return function(...args) {
@@ -53,44 +50,44 @@ FLX.throttle = function(fn, limit = 100) {
   };
 };
 
-/* ── Generate ID ── */
+/* kimlik olustur */
 FLX.generateId = function(prefix = 'flx') {
   return `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
 };
 
-/* ── Escape HTML ── */
+/* html kacis */
 FLX.escapeHtml = function(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 };
 
-/* ── Linear Interpolation ── */
+/* dogrusal interpolasyon */
 FLX.lerp = function(start, end, factor) {
   return start + (end - start) * factor;
 };
 
-/* ── Clamp ── */
+/* sinirla */
 FLX.clamp = function(value, min, max) {
   return Math.min(Math.max(value, min), max);
 };
 
-/* ── Map Range ── */
+/* aralik esle */
 FLX.mapRange = function(value, inMin, inMax, outMin, outMax) {
   return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 };
 
-/* ── Random Integer ── */
+/* rastgele tamsayi */
 FLX.randomInt = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-/* ── Random Float ── */
+/* rastgele ondalik */
 FLX.randomFloat = function(min, max) {
   return Math.random() * (max - min) + min;
 };
 
-/* ── HSL to Hex ── */
+/* hsl den hex e */
 FLX.hslToHex = function(h, s, l) {
   s /= 100;
   l /= 100;
@@ -103,7 +100,7 @@ FLX.hslToHex = function(h, s, l) {
   return `#${f(0)}${f(8)}${f(4)}`;
 };
 
-/* ── Hex to RGB ── */
+/* hex den rgb ye */
 FLX.hexToRgb = function(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
@@ -113,7 +110,7 @@ FLX.hexToRgb = function(hex) {
   } : null;
 };
 
-/* ── Hex to HSL ── */
+/* hex den hsl ye */
 FLX.hexToHsl = function(hex) {
   const rgb = FLX.hexToRgb(hex);
   if (!rgb) return null;
@@ -139,13 +136,13 @@ FLX.hexToHsl = function(hex) {
   };
 };
 
-/* ── Scroll Reveal (IntersectionObserver) ── */
+/* kaydirma gorunur yap intersectionobserver */
 FLX.initScrollReveal = function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        // Don't unobserve stagger children so they can re-trigger
+
         if (!entry.target.classList.contains('stagger-children')) {
           observer.unobserve(entry.target);
         }
@@ -163,7 +160,7 @@ FLX.initScrollReveal = function() {
   return observer;
 };
 
-/* ── Create SVG Icon ── */
+/* svg ikonu olustur */
 FLX.icon = function(name) {
   const icons = {
     chevronDown: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
@@ -196,7 +193,7 @@ FLX.icon = function(name) {
   return icons[name] || '';
 };
 
-/* ── Make Scrollbar Width Available ── */
+/* kaydirma cubugu genisligini kullanilabilir yap */
 FLX.measureScrollbar = function() {
   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
   document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');

@@ -1,9 +1,6 @@
-/* ==========================================================================
-   FLOREX.LAB — Code Editor Styles
-   Live code editor layout, tabs, console, preview panel
-   ========================================================================== */
+/* florex lab kod editörü styles live kod editörü düzen sekmeler konsol preview panel */
 
-/* ── Toolbar ── */
+/* toolbar */
 .ce-toolbar {
   display: flex;
   align-items: center;
@@ -62,7 +59,7 @@
   margin: 0 var(--space-1);
 }
 
-/* ── Template Selector ── */
+/* template seçim kutusuor */
 .ce-template-selector {
   position: relative;
 }
@@ -116,7 +113,7 @@
   opacity: 0.6;
 }
 
-/* ── Tabs ── */
+/* sekmeler */
 .ce-tabs {
   display: flex;
   gap: 2px;
@@ -164,7 +161,7 @@
 .ce-dot-css  { background: var(--retro-teal); }
 .ce-dot-js   { background: var(--retro-yellow); }
 
-/* ── Editor Wrapper ── */
+/* editor wrapper */
 .ce-editor-wrapper {
   display: grid;
   border: 1px solid var(--border);
@@ -187,7 +184,7 @@
   grid-template-rows: 1fr 6px 1fr;
 }
 
-/* ── Code Panel ── */
+/* code panel */
 .ce-code-panel {
   display: flex;
   flex-direction: column;
@@ -260,7 +257,7 @@
   border-radius: 3px;
 }
 
-/* ── Console ── */
+/* konsol */
 .ce-console {
   border-top: 1px solid var(--border);
   max-height: 160px;
@@ -362,7 +359,7 @@
   color: var(--retro-yellow);
 }
 
-/* ── Resize Handle ── */
+/* resize handle */
 .ce-resize-handle {
   display: flex;
   align-items: center;
@@ -412,7 +409,7 @@
   background: var(--retro-yellow);
 }
 
-/* ── Preview Panel ── */
+/* preview panel */
 .ce-preview-panel {
   display: flex;
   flex-direction: column;
@@ -455,7 +452,7 @@
   flex: 1;
 }
 
-/* ── Auto-run Toggle ── */
+/* auto run toggle */
 .ce-auto-run-label {
   display: flex;
   align-items: center;
@@ -509,7 +506,7 @@
   letter-spacing: 0.05em;
 }
 
-/* ── Preview Frame ── */
+/* preview frame */
 .ce-preview-frame {
   flex: 1;
   width: 100%;
@@ -518,7 +515,7 @@
   min-height: 0;
 }
 
-/* ── Responsive ── */
+/* responsive */
 @media (max-width: 768px) {
   .ce-toolbar {
     padding: var(--space-2) var(--space-3);

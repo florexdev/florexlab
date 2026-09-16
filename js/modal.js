@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Modal System
-   Accessible modal with focus trap, backdrop click, and ESC close
-   ========================================================================== */
+/* florex lab modal sistemi erisilebilir modal odak tuzagi arkaplan tiklamasi ve esc ile kapatma */
 
 (function() {
   'use strict';
@@ -20,13 +17,11 @@
 
     previousFocus = document.activeElement;
 
-    // Set content
     titleEl.textContent = title || '';
     bodyEl.innerHTML = typeof body === 'string' ? body : '';
     footerEl.innerHTML = typeof footer === 'string' ? footer : '';
     footerEl.style.display = footer ? '' : 'none';
 
-    // Show
     FLX.measureScrollbar();
     document.body.classList.add('scroll-locked');
     backdrop.classList.add('open');
@@ -36,7 +31,6 @@
     isOpen = true;
     modal._onClose = onClose;
 
-    // Focus first focusable element
     requestAnimationFrame(() => {
       const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
       if (firstFocusable) firstFocusable.focus();
@@ -58,13 +52,11 @@
       modal._onClose = null;
     }
 
-    // Restore focus
     if (previousFocus && previousFocus.focus) {
       previousFocus.focus();
     }
   }
 
-  // Focus trap
   function trapFocus(e) {
     if (!isOpen) return;
 
@@ -87,7 +79,6 @@
     }
   }
 
-  // Init
   function init() {
     if (closeBtn) {
       closeBtn.addEventListener('click', close);

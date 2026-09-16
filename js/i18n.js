@@ -1,17 +1,14 @@
-/* ==========================================================================
-   FLOREX.LAB — Internationalization (i18n)
-   Turkish (tr) & English (en) language support with instant dynamic translation
-   ========================================================================== */
+/* florex lab coklu dil i18n turkce tr ingilizce en dil destegi anlik dinamik ceviri ile */
 
 (function() {
   'use strict';
 
   const STORAGE_KEY = 'flx-lang';
 
-  /* ── Translations Dictionary ── */
+  /* çeviri sözlüğü */
   const translations = {
     tr: {
-      // Nav
+
       'nav.home': 'Ana Sayfa',
       'nav.experiments': 'Deneyler',
       'nav.components': 'Bileşenler',
@@ -20,7 +17,6 @@
       'nav.about': 'Hakkında',
       'nav.search': 'Arayın...',
 
-      // Hero
       'hero.eyebrow': 'FlorexDev',
       'hero.title1': 'Deneysel UI,',
       'hero.title2': 'Animasyonlar & Bileşenler',
@@ -32,13 +28,11 @@
       'hero.statTools': 'CSS Aracı',
       'hero.statVersion': 'Sürüm',
 
-      // Featured
       'featured.label': 'Öne Çıkanlar',
       'featured.title': 'Son Deneyler',
       'featured.desc': 'Özenle seçilmiş son frontend deneyleri ve interaktif demolar.',
       'featured.viewAll': 'Tüm Deneyleri İncele',
 
-      // Experiments Section
       'exp.label': 'Deneyler',
       'exp.title': 'Deneysel Laboratuvar',
       'exp.description': 'CSS animasyonları, JavaScript etkileşimleri, tuval fizikleri ve UI konseptleri.',
@@ -54,24 +48,20 @@
       'exp.controlsTitle': 'Kontroller',
       'exp.codeTitle': 'Kod Çıktısı',
 
-      // Components Section
       'comp.label': 'Bileşenler',
       'comp.title': 'Bileşen Galerisi',
       'comp.description': 'Saf HTML & CSS ile yazılmış, kütüphanesiz erişilebilir ve özelleştirilebilir UI bileşenleri.',
       'comp.viewCode': 'Kodu Gör',
       'comp.copyBtn': 'Kopyala',
 
-      // Playground Section
       'pg.label': 'Oyun Alanı',
       'pg.title': 'CSS Oyun Alanı',
       'pg.description': 'Canlı önizlemeli ve kopyalanabilir CSS kod çıktılı interaktif görsel jeneratörler.',
 
-      // Code Editor Section
       'ce.label': 'Kod Editörü',
       'ce.title': 'Canlı Kod Editörü',
       'ce.description': 'HTML, CSS ve JavaScript kodlarını yazın ve anında canlı ön izleyin.',
 
-      // About Section
       'about.label': 'Hakkında',
       'about.title': 'FLOREX.LAB Hakkında',
       'about.subtitle': 'Frontend Geliştirme & Deneyler',
@@ -85,7 +75,6 @@
       'about.linkBlog': 'Blog',
       'about.linkGitHub': 'GitHub',
 
-      // Command Palette
       'cmd.placeholder': 'Bir komut veya deney yazın... (örn: Tema, Gradient, Parçacıklar)',
       'cmd.groupNav': 'Navigasyon',
       'cmd.groupActions': 'Aksiyonlar',
@@ -94,18 +83,16 @@
       'cmd.toggleTheme': 'Tüm Temayı Değiştir',
       'cmd.empty': 'Sonuç bulunamadı',
 
-      // Toast / Easter egg
       'toast.copied': 'Panoya kopyalandı',
       'toast.copyFailed': 'Kopyalanamadı',
       'easter.title': 'Gizli Kilit Açıldı! 🔓',
       'easter.message': 'Florex geliştirici easter egg\'ini tetiklediniz.',
 
-      // Footer
       'footer.tagline': '"Üretim için değil, deneyler için tasarlandı."',
       'footer.rights': 'Tüm hakları saklıdır. HTML, CSS & Vanilla JS ile geliştirilmiştir.'
     },
     en: {
-      // Nav
+
       'nav.home': 'Home',
       'nav.experiments': 'Experiments',
       'nav.components': 'Components',
@@ -114,7 +101,6 @@
       'nav.about': 'About',
       'nav.search': 'Search...',
 
-      // Hero
       'hero.eyebrow': 'FlorexDev',
       'hero.title1': 'Experimental UI,',
       'hero.title2': 'Animations & Components',
@@ -126,13 +112,11 @@
       'hero.statTools': 'CSS Tools',
       'hero.statVersion': 'Version',
 
-      // Featured
       'featured.label': 'Featured',
       'featured.title': 'Latest Experiments',
       'featured.desc': 'A curated selection of recent frontend experiments and interactive demos.',
       'featured.viewAll': 'View all experiments',
 
-      // Experiments Section
       'exp.label': 'Experiments',
       'exp.title': 'Experimental Laboratory',
       'exp.description': 'CSS animations, JavaScript interactions, canvas physics, and UI concepts.',
@@ -148,24 +132,20 @@
       'exp.controlsTitle': 'Controls',
       'exp.codeTitle': 'Code Output',
 
-      // Components Section
       'comp.label': 'Components',
       'comp.title': 'Component Gallery',
       'comp.description': 'Pure HTML & CSS components, zero libraries, accessible and customizable.',
       'comp.viewCode': 'View Code',
       'comp.copyBtn': 'Copy',
 
-      // Playground Section
       'pg.label': 'Playground',
       'pg.title': 'CSS Playground',
       'pg.description': 'Interactive visual generators with live preview and copyable CSS output.',
 
-      // Code Editor Section
       'ce.label': 'Code Editor',
       'ce.title': 'Live Code Editor',
       'ce.description': 'Write HTML, CSS and JavaScript code and see a live preview instantly.',
 
-      // About Section
       'about.label': 'About',
       'about.title': 'About This Lab',
       'about.subtitle': 'Frontend Engineering & Experiments',
@@ -179,7 +159,6 @@
       'about.linkBlog': 'Blog',
       'about.linkGitHub': 'GitHub',
 
-      // Command Palette
       'cmd.placeholder': 'Type a command or experiment... (e.g. Theme, Gradient, Particles)',
       'cmd.groupNav': 'Navigation',
       'cmd.groupActions': 'Actions',
@@ -188,13 +167,11 @@
       'cmd.toggleTheme': 'Toggle Theme',
       'cmd.empty': 'No results found',
 
-      // Toast / Easter egg
       'toast.copied': 'Copied to clipboard',
       'toast.copyFailed': 'Failed to copy',
       'easter.title': 'Secret Unlocked! 🔓',
       'easter.message': 'You triggered the Florex developer easter egg.',
 
-      // Footer
       'footer.tagline': '"Built for experiments, not production."',
       'footer.rights': 'All rights reserved. Built with HTML, CSS & Vanilla JS.'
     }
@@ -217,7 +194,7 @@
   function saveLang(lang) {
     try {
       localStorage.setItem(STORAGE_KEY, lang);
-    } catch { /* localStorage unavailable */ }
+    } catch {  }
   }
 
   function t(key) {
@@ -229,7 +206,6 @@
     currentLang = lang;
     document.documentElement.setAttribute('lang', lang);
 
-    // Update all elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       const translation = t(key);
@@ -242,13 +218,11 @@
       }
     });
 
-    // Update language toggle buttons text
     document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
       btn.textContent = lang === 'tr' ? 'TR / EN' : 'EN / TR';
       btn.setAttribute('title', lang === 'tr' ? 'Switch to English' : 'Türkçeye Geç');
     });
 
-    // Trigger re-renders of components & playground if available
     if (window.FLX) {
       if (FLX.componentsGallery && typeof FLX.componentsGallery.init === 'function') {
         FLX.componentsGallery.init();
@@ -284,7 +258,6 @@
     const lang = saved || getSystemLang();
     applyLanguage(lang);
 
-    // Desktop & mobile lang toggle button events
     document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
       btn.addEventListener('click', toggleLanguage);
     });

@@ -1,10 +1,7 @@
-/* ==========================================================================
-   FLOREX.LAB — Design Tokens (Retro Palette Edition)
-   CSS Custom Properties for the Retro Developer Aesthetics
-   ========================================================================== */
+/* florex lab design tokens retro palette edition css custom properties for the retro developer aesthetics */
 
 :root {
-  /* ── Retro Palette (Extracted from prompt image) ── */
+  /* retro palette extracted from prompt image */
   --retro-red: #ea4335;
   --retro-orange: #ff7a29;
   --retro-yellow: #ffc13b;
@@ -13,7 +10,7 @@
   --retro-teal: #85b2a5;
   --retro-pink: #d88ba2;
 
-  /* ── Dark Theme (Warm Gruvbox / Retro Dark) ── */
+  /* dark theme warm gruvbox retro dark */
   --bg-primary: #1e1e1d;
   --bg-secondary: #161615;
   --bg-tertiary: #252524;
@@ -22,13 +19,13 @@
   --surface-active: #3c3c3a;
   --surface-elevated: #2d2d2b;
 
-  /* ── Text (Warm retro cream) ── */
+  /* metin sicak retro krem */
   --text-primary: #fbf1c7;
   --text-secondary: #d5c4a1;
   --text-muted: #928374;
   --text-inverse: #1e1e1d;
 
-  /* ── Accents mapped to Retro Palette ── */
+  /* retro palete eslenen vurgular */
   --accent-red: var(--retro-red);
   --accent-red-soft: rgba(234, 67, 53, 0.15);
   --accent-red-glow: rgba(234, 67, 53, 0.4);
@@ -55,20 +52,20 @@
   --accent-cyan: var(--retro-teal);
   --accent-cyan-soft: rgba(133, 178, 165, 0.15);
 
-  /* ── Gradients ── */
+  /* gradyanlar */
   --gradient-primary: linear-gradient(135deg, var(--retro-red), var(--retro-orange), var(--retro-yellow));
   --gradient-subtle: linear-gradient(135deg, rgba(234, 67, 53, 0.08), rgba(133, 178, 165, 0.08));
   --gradient-glow: linear-gradient(135deg, var(--accent-red-glow), var(--accent-blue-glow));
   --gradient-surface: linear-gradient(180deg, var(--surface), var(--bg-secondary));
   --gradient-retro-stripe: linear-gradient(90deg, #ea4335, #ff7a29, #ffc13b, #b5c437, #8bc386, #85b2a5, #d88ba2);
 
-  /* ── Borders ── */
+  /* kenarliklar */
   --border: rgba(251, 241, 199, 0.08);
   --border-subtle: rgba(251, 241, 199, 0.04);
   --border-hover: rgba(251, 241, 199, 0.16);
   --border-accent: rgba(234, 67, 53, 0.4);
 
-  /* ── Radius (Slightly crisper for retro feel) ── */
+  /* retro hissi icin daha keskin koseler */
   --radius-xs: 3px;
   --radius-sm: 5px;
   --radius-md: 8px;
@@ -76,14 +73,14 @@
   --radius-xl: 16px;
   --radius-full: 9999px;
 
-  /* ── Shadows ── */
+  /* golgeler */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-glow-red: 0 0 20px rgba(234, 67, 53, 0.2);
   --shadow-glow-blue: 0 0 20px rgba(133, 178, 165, 0.2);
 
-  /* ── Typography ── */
+  /* tipografi */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 
@@ -108,7 +105,7 @@
   --weight-bold: 700;
   --weight-black: 900;
 
-  /* ── Spacing ── */
+  /* bosluklar */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -122,12 +119,12 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* ── Layout ── */
+  /* düzen */
   --container-max: 1280px;
   --container-narrow: 960px;
   --navbar-height: 64px;
 
-  /* ── Transitions ── */
+  /* gecisler */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -135,7 +132,7 @@
   --duration-normal: 250ms;
   --duration-slow: 400ms;
 
-  /* ── Z-index ── */
+  /* z indeksi */
   --z-base: 1;
   --z-dropdown: 100;
   --z-sticky: 200;
@@ -146,7 +143,7 @@
   --z-tooltip: 1300;
 }
 
-/* ── Light Theme (Retro Warm Parchment / Cream) ── */
+/* acik tema retro sicak parsomem krem */
 [data-theme="light"] {
   --bg-primary: #fbf4e2;
   --bg-secondary: #f3ebd5;

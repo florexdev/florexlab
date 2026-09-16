@@ -1,12 +1,9 @@
-/* ==========================================================================
-   FLOREX.LAB — Main Application
-   App bootstrap, hero interactive effects, easter egg handler
-   ========================================================================== */
+/* florex lab ana uygulama başlatma interaktif efektler gizli içerikler */
 
 (function() {
   'use strict';
 
-  /* ── 1. Hero Interactive Effects ── */
+  /* 1 hero i nteraktif efektleri */
   function initHeroEffects() {
     const hero = document.querySelector('.hero');
     const glowRed = document.getElementById('hero-glow-red');
@@ -56,14 +53,14 @@
     animateHero();
   }
 
-  /* ── 2. Easter Egg ("florexdev" sequence detector) ── */
+  /* 2 gizli sürpriz easter egg florexdev sequence detector */
   function initEasterEgg() {
     const secretCode = 'florexdev';
     let inputBuffer = '';
     let isEggActive = false;
 
     document.addEventListener('keydown', (e) => {
-      // Ignore if user is inside an input, textarea, or contenteditable
+
       const activeEl = document.activeElement;
       if (
         activeEl &&
@@ -95,7 +92,6 @@
       overlay.innerHTML = '';
       overlay.classList.add('active');
 
-      // Create Matrix columns
       const columnCount = Math.floor(window.innerWidth / 24);
       const chars = '01FLOREXDEV<>/{};:*#@!%&';
 
@@ -115,7 +111,6 @@
         overlay.appendChild(col);
       }
 
-      // Center message
       const msg = document.createElement('div');
       msg.className = 'easter-egg-message easter-egg-glitch';
       msg.innerHTML = '&gt; ACCESS GRANTED: FLOREX.LAB UNLOCKED &lt;';
@@ -140,7 +135,7 @@
     }
   }
 
-  /* ── 3. App Bootstrap ── */
+  /* 3 uygulamayı başlat */
   function initApp() {
     initHeroEffects();
     initEasterEgg();

@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Experiments System
-   Card grid rendering, filtering, search, viewer with controls and code
-   ========================================================================== */
+/* florex lab deneyler sistemi kart izgara olusturma filtreleme arama kontroller ve kod iceren goruntuleyici */
 
 (function() {
   'use strict';
@@ -18,7 +15,7 @@
   let currentExperiment = null;
   let currentState = {};
 
-  /* ── Card Preview Generators ── */
+  /* kart onizleme ureticileri */
   function getCardPreview(exp) {
     switch (exp.id) {
       case 'gradient-playground':
@@ -94,7 +91,7 @@
     'flip-card': { name: '3D Dönen Kart', desc: 'Üzerine gelindiğinde dönen 3 boyutlu kart.' }
   };
 
-  /* ── Render Card ── */
+  /* kart oluştur */
   function renderCard(exp) {
     const isTR = window.FLX && FLX.i18n && FLX.i18n.getCurrentLang() === 'tr';
     const expName = (isTR && expTR[exp.id]) ? expTR[exp.id].name : exp.name;
@@ -129,7 +126,7 @@
     return card;
   }
 
-  /* ── Render Grid ── */
+  /* izgara oluştur */
   function renderGrid(container, experiments, limit) {
     container.innerHTML = '';
     let filtered = experiments;
@@ -164,7 +161,7 @@
     filtered.forEach(exp => container.appendChild(renderCard(exp)));
   }
 
-  /* ── Open Viewer ── */
+  /* görüntüleyiciyi aç */
   function openViewer(experimentId) {
     const exp = FLX.experimentData.find(e => e.id === experimentId);
     if (!exp || exp.status !== 'active') return;
@@ -172,7 +169,6 @@
     currentExperiment = exp;
     currentState = {};
 
-    // Build default state from controls
     if (exp.controls) {
       exp.controls.forEach(c => {
         currentState[c.key] = c.default;
@@ -181,15 +177,12 @@
 
     const isTR = window.FLX && FLX.i18n && FLX.i18n.getCurrentLang() === 'tr';
 
-    // Hide grid, show viewer
     if (gridWrapper) gridWrapper.style.display = 'none';
     viewerContainer.classList.add('active');
 
-    // Hide filter bar
     const filterParent = filtersContainer ? filtersContainer.closest('.reveal') || filtersContainer.parentElement : null;
     if (filterParent) filterParent.style.display = 'none';
 
-    // Render viewer
     viewerContainer.innerHTML = `
       <div class="experiment-viewer-header">
         <button class="experiment-viewer-back" id="viewer-back" aria-label="Back to experiments">
@@ -235,25 +228,20 @@
       </div>
     `;
 
-    // Init experiment
     const previewContainer = document.getElementById('experiment-preview');
     exp.init(previewContainer, { ...currentState });
 
-    // Render controls
     renderControls(exp);
 
-    // Update code
     updateCode();
 
-    // Back button
     document.getElementById('viewer-back').addEventListener('click', closeViewer);
 
-    // Reset button
     document.getElementById('viewer-reset').addEventListener('click', () => {
       if (exp.controls) {
         exp.controls.forEach(c => { currentState[c.key] = c.default; });
       }
-      // Destroy and re-init
+
       exp.destroy();
       previewContainer.innerHTML = '';
       exp.init(previewContainer, { ...currentState });
@@ -261,17 +249,15 @@
       updateCode();
     });
 
-    // Copy code
     document.getElementById('copy-code-btn').addEventListener('click', () => {
       const code = exp.getCode(currentState);
       FLX.copyToClipboard(code);
     });
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  /* ── Close Viewer ── */
+  /* görüntüleyiciyi kapat */
   function closeViewer() {
     if (currentExperiment) {
       currentExperiment.destroy();
@@ -286,7 +272,7 @@
     if (filterParent) filterParent.style.display = '';
   }
 
-  /* ── Render Controls ── */
+  /* kontrolleri olustur */
   function renderControls(exp) {
     const list = document.getElementById('experiment-controls-list');
     if (!list || !exp.controls) return;
@@ -336,7 +322,7 @@
         list.appendChild(group);
         group.querySelector('select').addEventListener('change', (e) => {
           currentState[ctrl.key] = e.target.value;
-          // Re-init for select changes (full rebuild)
+
           const preview = document.getElementById('experiment-preview');
           exp.destroy();
           preview.innerHTML = '';
@@ -347,7 +333,7 @@
     });
   }
 
-  /* ── Update Code Output ── */
+  /* kod ciktisini guncelle */
   function updateCode() {
     const output = document.getElementById('experiment-code-output');
     if (output && currentExperiment) {
@@ -355,22 +341,19 @@
     }
   }
 
-  /* ── Init ── */
+  /* baslat */
   function init() {
     if (!FLX.experimentData) return;
 
-    // Render main grid
     if (gridContainer) {
       renderGrid(gridContainer, FLX.experimentData);
     }
 
-    // Render featured (first 6 active)
     if (featuredContainer) {
       const featured = FLX.experimentData.filter(e => e.status === 'active').slice(0, 6);
       featured.forEach(exp => featuredContainer.appendChild(renderCard(exp)));
     }
 
-    // Filters
     if (filtersContainer) {
       filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -382,7 +365,6 @@
       });
     }
 
-    // Search
     if (searchInput) {
       searchInput.addEventListener('input', FLX.debounce((e) => {
         searchQuery = e.target.value;

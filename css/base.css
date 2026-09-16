@@ -1,9 +1,6 @@
-/* ==========================================================================
-   FLOREX.LAB — Base Styles (Retro Edition)
-   Reset, typography, global elements, retro swatches bar
-   ========================================================================== */
+/* florex lab temel stiller retro edition sıfırlama tipografi global elements retro swatches bar */
 
-/* ── Reset ── */
+/* sıfırlama */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -28,7 +25,6 @@ body {
   min-height: 100vh;
 }
 
-/* Noise texture overlay */
 body::after {
   content: '';
   position: fixed;
@@ -41,7 +37,6 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-/* Retro Scanlines Effect (Subtle) */
 body::before {
   content: '';
   position: fixed;
@@ -59,7 +54,7 @@ body::before {
   background-size: 100% 4px;
 }
 
-/* ── Retro Swatches Bar ── */
+/* retro swatches bar */
 .retro-color-bar {
   display: flex;
   height: 3px;
@@ -93,7 +88,6 @@ body::before {
   display: inline-block;
 }
 
-/* Theme transition */
 body.theme-transitioning,
 body.theme-transitioning * {
   transition: background-color var(--duration-slow) var(--ease-out),
@@ -102,13 +96,12 @@ body.theme-transitioning * {
               box-shadow var(--duration-slow) var(--ease-out) !important;
 }
 
-/* Scroll lock for modals */
 body.scroll-locked {
   overflow: hidden;
   padding-right: var(--scrollbar-width, 0px);
 }
 
-/* ── Typography ── */
+/* tipografi */
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
@@ -189,13 +182,13 @@ kbd {
   line-height: 1;
 }
 
-/* ── Selection ── */
+/* seçim kutusuion */
 ::selection {
   background: var(--retro-orange);
   color: var(--bg-primary);
 }
 
-/* ── Scrollbar ── */
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -215,30 +208,29 @@ kbd {
   background: var(--text-muted);
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--surface-hover) var(--bg-secondary);
 }
 
-/* ── Focus ── */
+/* focus */
 :focus-visible {
   outline: 2px solid var(--retro-yellow);
   outline-offset: 2px;
 }
 
-/* ── Lists ── */
+/* lists */
 ul, ol {
   list-style: none;
 }
 
-/* ── Images ── */
+/* images */
 img, svg {
   display: block;
   max-width: 100%;
 }
 
-/* ── Button reset ── */
+/* button sıfırlama */
 button {
   font: inherit;
   cursor: pointer;
@@ -247,13 +239,13 @@ button {
   color: inherit;
 }
 
-/* ── Input reset ── */
+/* input sıfırlama */
 input, select, textarea {
   font: inherit;
   color: inherit;
 }
 
-/* ── Utility classes ── */
+/* utility classes */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -285,7 +277,6 @@ input, select, textarea {
   color: var(--text-secondary);
 }
 
-/* Retro Badge Tag */
 .retro-tag {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -296,7 +287,7 @@ input, select, textarea {
   border-radius: var(--radius-xs);
 }
 
-/* ── Reduced Motion ── */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

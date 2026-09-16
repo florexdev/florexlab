@@ -1,9 +1,6 @@
-/* ==========================================================================
-   FLOREX.LAB — Layout
-   Container, navbar, hero, sections, footer, grid systems
-   ========================================================================== */
+/* florex lab düzen container navbar hero sections footer grid systems */
 
-/* ── Container ── */
+/* container */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -15,7 +12,7 @@
   max-width: var(--container-narrow);
 }
 
-/* ── Sections ── */
+/* sections */
 .section {
   padding: var(--space-24) 0;
   display: none;
@@ -66,7 +63,7 @@
   box-shadow: 0 0 8px var(--accent-red-glow);
 }
 
-/* ── Navbar ── */
+/* navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -101,7 +98,6 @@
   padding: 0 var(--space-6);
 }
 
-/* Logo */
 .navbar-logo {
   font-family: var(--font-mono);
   font-size: var(--text-lg);
@@ -133,7 +129,6 @@
   color: var(--accent-red);
 }
 
-/* Nav links */
 .navbar-nav {
   display: flex;
   align-items: center;
@@ -169,7 +164,6 @@
   margin: 0 var(--space-2);
 }
 
-/* External links in nav */
 .nav-external {
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
@@ -192,7 +186,6 @@
   height: 16px;
 }
 
-/* Theme toggle */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -215,7 +208,6 @@
   height: 18px;
 }
 
-/* Keyboard shortcut hint */
 .nav-shortcut {
   display: flex;
   align-items: center;
@@ -239,7 +231,6 @@
   font-size: var(--text-xs);
 }
 
-/* Hamburger */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -282,7 +273,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile nav */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -324,7 +314,7 @@
   padding: var(--space-3) var(--space-4);
 }
 
-/* ── Hero ── */
+/* hero */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -468,28 +458,28 @@
   box-shadow: 0 0 6px var(--accent-green);
 }
 
-/* ── Experiment Grid ── */
+/* experiment grid */
 .experiment-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: var(--space-6);
 }
 
-/* ── Component Grid ── */
+/* component grid */
 .component-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-12);
 }
 
-/* ── Playground Grid ── */
+/* oyun alanı grid */
 .playground-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: var(--space-6);
 }
 
-/* ── Filter Bar ── */
+/* filter bar */
 .filter-bar {
   display: flex;
   align-items: center;
@@ -531,7 +521,7 @@
   margin-left: var(--space-1);
 }
 
-/* ── Search Bar ── */
+/* search bar */
 .search-bar {
   position: relative;
   margin-bottom: var(--space-6);
@@ -575,7 +565,7 @@
   height: 18px;
 }
 
-/* ── Footer ── */
+/* footer */
 .site-footer {
   border-top: 1px solid var(--border);
   padding: var(--space-12) 0;

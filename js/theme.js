@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Theme System
-   Dark/light theme with localStorage persistence and system preference detection
-   ========================================================================== */
+/* florex lab tema sistemi yerel depolama kaliciligi ve sistem tercihi algilama ile karanlik aydinlik tema */
 
 (function() {
   'use strict';
@@ -23,7 +20,7 @@
   function saveTheme(theme) {
     try {
       localStorage.setItem(STORAGE_KEY, theme);
-    } catch { /* localStorage unavailable */ }
+    } catch {  }
   }
 
   function applyTheme(theme, animate) {
@@ -35,13 +32,11 @@
 
     html.setAttribute('data-theme', theme);
 
-    // Update theme-color meta
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
       metaTheme.content = theme === 'dark' ? '#0a0e1a' : '#f8f9fc';
     }
 
-    // Update toggle icons
     const darkIcon = document.querySelector('.theme-icon-dark');
     const lightIcon = document.querySelector('.theme-icon-light');
     if (darkIcon && lightIcon) {
@@ -63,25 +58,21 @@
     saveTheme(next);
   }
 
-  // Initialize
   function init() {
     const savedTheme = getSavedTheme();
     const theme = savedTheme || getSystemTheme();
     applyTheme(theme, false);
 
-    // Desktop toggle
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', toggleTheme);
     }
 
-    // Mobile toggle
     const mobileToggle = document.getElementById('mobile-theme-toggle');
     if (mobileToggle) {
       mobileToggle.addEventListener('click', toggleTheme);
     }
 
-    // Listen for system theme changes (only if no saved preference)
     window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
       if (!getSavedTheme()) {
         applyTheme(e.matches ? 'light' : 'dark', true);
@@ -89,10 +80,8 @@
     });
   }
 
-  // Expose
   FLX.theme = { toggle: toggleTheme, init };
 
-  // Init immediately if DOM is ready, otherwise wait
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

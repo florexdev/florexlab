@@ -1,16 +1,10 @@
-/* ==========================================================================
-   FLOREX.LAB — Experiment Data Registry
-   All 24 experiments with implementations, controls, and code output
-   ========================================================================== */
+/* florex lab deney verileri kaydi tum 24 deney uygulamalar kontroller ve kod ciktisi ile */
 
 (function() {
   'use strict';
 
   const experiments = [
 
-    // ═══════════════════════════════════════════
-    // FLX-001: Gradient Playground
-    // ═══════════════════════════════════════════
     {
       id: 'gradient-playground',
       name: 'Gradient Playground',
@@ -51,9 +45,6 @@
       destroy() { this._box = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-002: Glassmorphism Card
-    // ═══════════════════════════════════════════
     {
       id: 'glassmorphism-card',
       name: 'Glassmorphism Card',
@@ -100,9 +91,6 @@
       destroy() { this._card = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-003: Neon Button
-    // ═══════════════════════════════════════════
     {
       id: 'neon-button',
       name: 'Neon Button',
@@ -154,9 +142,6 @@
       destroy() { this._btn = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-004: Animated Border
-    // ═══════════════════════════════════════════
     {
       id: 'animated-border',
       name: 'Animated Border',
@@ -201,9 +186,6 @@
       destroy() { this._border = null; this._inner = null; this._wrapper = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-005: CSS Loader Collection
-    // ═══════════════════════════════════════════
     {
       id: 'css-loaders',
       name: 'CSS Loader Collection',
@@ -245,35 +227,28 @@
         const s = size;
         const loaders = this._loaders;
 
-        // 1. Spinner
         loaders[0].el.style.cssText = `width:${s}px;height:${s}px;border:3px solid rgba(128,128,128,0.2);border-top-color:${color};border-radius:50%;animation:spin 0.7s linear infinite;`;
         loaders[0].label.textContent = 'Spinner';
 
-        // 2. Dots
         loaders[1].el.style.cssText = 'display:flex;gap:6px;';
         loaders[1].el.innerHTML = [0,1,2].map(i =>
           `<span style="width:${s/4}px;height:${s/4}px;background:${color};border-radius:50%;animation:dotPulse 1.4s ease-in-out infinite;animation-delay:${i*0.2}s;"></span>`
         ).join('');
         loaders[1].label.textContent = 'Dots';
 
-        // 3. Ring
         loaders[2].el.style.cssText = `width:${s}px;height:${s}px;border:3px solid ${color};border-radius:50%;border-right-color:transparent;border-bottom-color:transparent;animation:spin 0.8s linear infinite;`;
         loaders[2].label.textContent = 'Ring';
 
-        // 4. Bar
         loaders[3].el.style.cssText = `width:${s*2.5}px;height:${s/6}px;background:rgba(128,128,128,0.2);border-radius:999px;overflow:hidden;`;
         loaders[3].el.innerHTML = `<span style="display:block;height:100%;width:40%;background:${color};border-radius:999px;animation:shimmer 1.5s ease-in-out infinite;background-size:200% 100%;background-image:linear-gradient(90deg,${color} 25%,transparent 50%,${color} 75%);"></span>`;
         loaders[3].label.textContent = 'Bar';
 
-        // 5. Bounce
         loaders[4].el.style.cssText = `width:${s/3}px;height:${s/3}px;background:${color};border-radius:50%;animation:float 0.6s ease-in-out infinite;`;
         loaders[4].label.textContent = 'Bounce';
 
-        // 6. Pulse
         loaders[5].el.style.cssText = `width:${s/2}px;height:${s/2}px;background:${color};border-radius:50%;animation:glowPulse 1s ease-in-out infinite;`;
         loaders[5].label.textContent = 'Pulse';
 
-        // 7. Dual Ring
         loaders[6].el.style.cssText = `position:relative;width:${s}px;height:${s}px;`;
         loaders[6].el.innerHTML = `
           <span style="position:absolute;inset:0;border:2px solid transparent;border-top-color:${color};border-radius:50%;animation:spin 0.8s linear infinite;"></span>
@@ -281,20 +256,16 @@
         `;
         loaders[6].label.textContent = 'Dual Ring';
 
-        // 8. Square
         loaders[7].el.style.cssText = `width:${s/3}px;height:${s/3}px;background:${color};animation:spin 1.2s ease-in-out infinite;`;
         loaders[7].label.textContent = 'Square';
       },
       getCode(state) {
         const { color } = state;
-        return `/* Spinner */\n.loader-spinner {\n  width: 32px;\n  height: 32px;\n  border: 3px solid rgba(128, 128, 128, 0.2);\n  border-top-color: ${color};\n  border-radius: 50%;\n  animation: spin 0.7s linear infinite;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}`;
+        return `\n.loader-spinner {\n  width: 32px;\n  height: 32px;\n  border: 3px solid rgba(128, 128, 128, 0.2);\n  border-top-color: ${color};\n  border-radius: 50%;\n  animation: spin 0.7s linear infinite;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}`;
       },
       destroy() { this._loaders = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-006: Text Reveal
-    // ═══════════════════════════════════════════
     {
       id: 'text-reveal',
       name: 'Text Reveal',
@@ -333,7 +304,6 @@
           this._wrapper.innerHTML = `<span style="display:inline-block;font-size:2rem;font-weight:700;font-family:var(--font-mono);color:var(--text-primary);overflow:hidden;white-space:nowrap;border-right:2px solid var(--accent-red);animation:typewriter ${duration}s steps(${text.length}) both, blink 0.7s step-end infinite;">${text}</span>`;
         }
 
-        // Auto-replay
         this._interval = setInterval(() => {
           this.update(state);
         }, (duration + 1.5) * 1000);
@@ -341,16 +311,13 @@
       getCode(state) {
         const { style, duration } = state;
         if (style === 'typewriter') {
-          return `/* Typewriter Effect */\n.typewriter {\n  overflow: hidden;\n  white-space: nowrap;\n  border-right: 2px solid currentColor;\n  animation: typewriter ${duration}s steps(10) both,\n             blink 0.7s step-end infinite;\n}\n\n@keyframes typewriter {\n  from { width: 0; }\n  to { width: 100%; }\n}`;
+          return `\n.typewriter {\n  overflow: hidden;\n  white-space: nowrap;\n  border-right: 2px solid currentColor;\n  animation: typewriter ${duration}s steps(10) both,\n             blink 0.7s step-end infinite;\n}\n\n@keyframes typewriter {\n  from { width: 0; }\n  to { width: 100%; }\n}`;
         }
-        return `/* ${style} */\n.text-reveal {\n  animation: fadeInUp ${duration}s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n\n@keyframes fadeInUp {\n  from { opacity: 0; transform: translateY(24px); }\n  to { opacity: 1; transform: translateY(0); }\n}`;
+        return `\n.text-reveal {\n  animation: fadeInUp ${duration}s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n\n@keyframes fadeInUp {\n  from { opacity: 0; transform: translateY(24px); }\n  to { opacity: 1; transform: translateY(0); }\n}`;
       },
       destroy() { clearInterval(this._interval); this._wrapper = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-007: Custom Cursor
-    // ═══════════════════════════════════════════
     {
       id: 'custom-cursor',
       name: 'Custom Cursor',
@@ -383,7 +350,6 @@
           cursor.style.left = x - state.size / 2 + 'px';
           cursor.style.top = y - state.size / 2 + 'px';
 
-          // Create trail
           if (state.trail > 0) {
             const dot = document.createElement('div');
             dot.style.cssText = `position:absolute;pointer-events:none;border-radius:50;width:${state.size / 2}px;height:${state.size / 2}px;left:${x - state.size / 4}px;top:${y - state.size / 4}px;background:${state.color};opacity:0.4;transition:opacity 0.5s ease;border-radius:50%;`;
@@ -405,7 +371,7 @@
         this._cursor.style.boxShadow = `0 0 ${state.size}px ${state.color}`;
       },
       getCode(state) {
-        return `/* Custom cursor */\n.custom-cursor {\n  position: fixed;\n  width: ${state.size}px;\n  height: ${state.size}px;\n  background: ${state.color};\n  border-radius: 50%;\n  pointer-events: none;\n  z-index: 9999;\n  opacity: 0.6;\n  box-shadow: 0 0 ${state.size}px ${state.color};\n  transition: transform 0.1s ease;\n}`;
+        return `\n.custom-cursor {\n  position: fixed;\n  width: ${state.size}px;\n  height: ${state.size}px;\n  background: ${state.color};\n  border-radius: 50%;\n  pointer-events: none;\n  z-index: 9999;\n  opacity: 0.6;\n  box-shadow: 0 0 ${state.size}px ${state.color};\n  transition: transform 0.1s ease;\n}`;
       },
       destroy() {
         if (this._container && this._onMove) {
@@ -415,9 +381,6 @@
       }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-008: Interactive Cursor
-    // ═══════════════════════════════════════════
     {
       id: 'interactive-cursor',
       name: 'Interactive Cursor',
@@ -491,9 +454,6 @@
       destroy() { if (this._cleanup) this._cleanup(); }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-009: Mouse Tracker
-    // ═══════════════════════════════════════════
     {
       id: 'mouse-tracker',
       name: 'Mouse Tracker',
@@ -584,9 +544,6 @@
       destroy() { if (this._cleanup) this._cleanup(); this._state = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-010: Color Generator
-    // ═══════════════════════════════════════════
     {
       id: 'color-generator',
       name: 'Color Generator',
@@ -661,15 +618,12 @@
       },
       update(state) { this.generate(state); },
       getCode(state) {
-        if (!this._colors) return '/* Generate a palette first */';
-        return `/* Color Palette */\n:root {\n${this._colors.map((c, i) => `  --color-${i + 1}: ${c};`).join('\n')}\n}`;
+        if (!this._colors) return '';
+        return `\n:root {\n${this._colors.map((c, i) => `  --color-${i + 1}: ${c};`).join('\n')}\n}`;
       },
       destroy() { this._palette = null; this._info = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-011: Keyboard Visualizer
-    // ═══════════════════════════════════════════
     {
       id: 'keyboard-visualizer',
       name: 'Keyboard Visualizer',
@@ -726,9 +680,6 @@
       destroy() { if (this._cleanup) this._cleanup(); }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-012: Particle Playground
-    // ═══════════════════════════════════════════
     {
       id: 'particle-playground',
       name: 'Particle Playground',
@@ -780,7 +731,6 @@
           const w = canvas.width || 600;
           const h = canvas.height || 400;
 
-          // Render particles
           particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
@@ -793,7 +743,6 @@
             ctx.fill();
           });
 
-          // Connections
           for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
               const dx = particles[i].x - particles[j].x;
@@ -838,9 +787,6 @@
       destroy() { if (this._cleanup) this._cleanup(); this._state = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-013: Dynamic Theme Switcher
-    // ═══════════════════════════════════════════
     {
       id: 'dynamic-theme',
       name: 'Dynamic Theme Switcher',
@@ -896,9 +842,6 @@
       destroy() { this._container = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-014: Command Palette (Demo)
-    // ═══════════════════════════════════════════
     {
       id: 'command-palette-demo',
       name: 'Command Palette',
@@ -943,9 +886,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-015: Toast System
-    // ═══════════════════════════════════════════
     {
       id: 'toast-system',
       name: 'Toast System',
@@ -986,9 +926,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-016: Modal System
-    // ═══════════════════════════════════════════
     {
       id: 'modal-system',
       name: 'Modal System',
@@ -1037,9 +974,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-017: Tooltip System
-    // ═══════════════════════════════════════════
     {
       id: 'tooltip-system',
       name: 'Tooltip System',
@@ -1070,14 +1004,11 @@
       },
       update() {},
       getCode() {
-        return `<!-- Tooltip -->\n<div class="tooltip-trigger">\n  <button>Hover me</button>\n  <div class="tooltip tooltip-top">Tooltip text</div>\n</div>\n\n/* CSS */\n.tooltip {\n  position: absolute;\n  padding: 6px 12px;\n  background: var(--surface);\n  border: 1px solid var(--border);\n  border-radius: 6px;\n  font-size: 0.75rem;\n  opacity: 0;\n  transition: opacity 0.15s, transform 0.15s;\n}\n\n.tooltip-trigger:hover .tooltip {\n  opacity: 1;\n  transform: translateY(0);\n}`;
+        return `<!-- Tooltip -->\n<div class="tooltip-trigger">\n  <button>Hover me</button>\n  <div class="tooltip tooltip-top">Tooltip text</div>\n</div>\n\n\n.tooltip {\n  position: absolute;\n  padding: 6px 12px;\n  background: var(--surface);\n  border: 1px solid var(--border);\n  border-radius: 6px;\n  font-size: 0.75rem;\n  opacity: 0;\n  transition: opacity 0.15s, transform 0.15s;\n}\n\n.tooltip-trigger:hover .tooltip {\n  opacity: 1;\n  transform: translateY(0);\n}`;
       },
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-018: Tabs
-    // ═══════════════════════════════════════════
     {
       id: 'tabs-demo',
       name: 'Tabs',
@@ -1129,9 +1060,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-019: Accordion
-    // ═══════════════════════════════════════════
     {
       id: 'accordion-demo',
       name: 'Accordion',
@@ -1198,14 +1126,11 @@
         });
       },
       getCode() {
-        return `<!-- Accordion -->\n<div class="accordion">\n  <div class="accordion-item">\n    <button class="accordion-trigger" aria-expanded="false">\n      Title\n      <span class="accordion-icon">▼</span>\n    </button>\n    <div class="accordion-content">\n      <div class="accordion-body">Content</div>\n    </div>\n  </div>\n</div>\n\n/* Toggle with JS */\nitem.classList.toggle('open');\ncontent.style.maxHeight = isOpen ? '0' : content.scrollHeight + 'px';`;
+        return `<!-- Accordion -->\n<div class="accordion">\n  <div class="accordion-item">\n    <button class="accordion-trigger" aria-expanded="false">\n      Title\n      <span class="accordion-icon">▼</span>\n    </button>\n    <div class="accordion-content">\n      <div class="accordion-body">Content</div>\n    </div>\n  </div>\n</div>\n\n\nitem.classList.toggle('open');\ncontent.style.maxHeight = isOpen ? '0' : content.scrollHeight + 'px';`;
       },
       destroy() { this._container = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-020: Context Menu
-    // ═══════════════════════════════════════════
     {
       id: 'context-menu',
       name: 'Context Menu',
@@ -1240,7 +1165,7 @@
           const rect = container.getBoundingClientRect();
           let x = e.clientX - rect.left;
           let y = e.clientY - rect.top;
-          // Boundary check
+
           if (x + 180 > rect.width) x = rect.width - 185;
           if (y + 160 > rect.height) y = rect.height - 165;
           menu.style.left = x + 'px';
@@ -1260,9 +1185,6 @@
       destroy() { if (this._closeMenu) document.removeEventListener('click', this._closeMenu); }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-021: Magnetic Button
-    // ═══════════════════════════════════════════
     {
       id: 'magnetic-button',
       name: 'Magnetic Button',
@@ -1324,9 +1246,6 @@
       destroy() { if (this._cleanup) this._cleanup(); }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-022: Scroll Reveal
-    // ═══════════════════════════════════════════
     {
       id: 'scroll-reveal',
       name: 'Scroll Reveal',
@@ -1369,7 +1288,6 @@
           `).join('')}
         `;
 
-        // IntersectionObserver
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1383,14 +1301,11 @@
         this._observer = observer;
       },
       getCode(state) {
-        return `// Scroll Reveal with IntersectionObserver\nconst observer = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      entry.target.classList.add('revealed');\n    }\n  });\n}, { threshold: 0.2 });\n\ndocument.querySelectorAll('.reveal').forEach(el => {\n  observer.observe(el);\n});\n\n/* CSS */\n.reveal {\n  opacity: 0;\n  transform: translateY(30px); /* ${state.style} */\n  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);\n}\n.reveal.revealed {\n  opacity: 1;\n  transform: none;\n}`;
+        return `// Scroll Reveal with IntersectionObserver\nconst observer = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      entry.target.classList.add('revealed');\n    }\n  });\n}, { threshold: 0.2 });\n\ndocument.querySelectorAll('.reveal').forEach(el => {\n  observer.observe(el);\n});\n\n\n.reveal {\n  opacity: 0;\n  transform: translateY(30px); \n  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);\n}\n.reveal.revealed {\n  opacity: 1;\n  transform: none;\n}`;
       },
       destroy() { if (this._observer) this._observer.disconnect(); this._container = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-023: Text Animation
-    // ═══════════════════════════════════════════
     {
       id: 'text-animation',
       name: 'Text Animation',
@@ -1434,14 +1349,11 @@
         }
       },
       getCode(state) {
-        return `/* ${state.effect} animation */\n.char {\n  display: inline-block;\n  animation: ${state.effect === 'wave' ? `float ${state.speed}s ease-in-out infinite` : state.effect === 'glitch' ? 'glitch 0.3s ease infinite' : `fadeIn ${state.speed}s ease both`};\n}\n\n/* Apply staggered delay per character */\n.char:nth-child(1) { animation-delay: 0s; }\n.char:nth-child(2) { animation-delay: 0.08s; }\n/* ... */`;
+        return `\n.char {\n  display: inline-block;\n  animation: ${state.effect === 'wave' ? `float ${state.speed}s ease-in-out infinite` : state.effect === 'glitch' ? 'glitch 0.3s ease infinite' : `fadeIn ${state.speed}s ease both`};\n}\n\n\n.char:nth-child(1) { animation-delay: 0s; }\n.char:nth-child(2) { animation-delay: 0.08s; }\n`;
       },
       destroy() { clearInterval(this._interval); this._container = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-024: Staggered Cards
-    // ═══════════════════════════════════════════
     {
       id: 'staggered-cards',
       name: 'Staggered Cards',
@@ -1485,15 +1397,11 @@
         `;
       },
       getCode(state) {
-        return `/* Staggered Cards */\n.card {\n  opacity: 0;\n  transform: ${state.direction === 'scale' ? 'scale(0.8)' : `translate${ state.direction === 'up' || state.direction === 'down' ? 'Y' : 'X'}(${state.direction === 'up' || state.direction === 'left' ? '30' : '-30'}px)`};\n  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;\n}\n\n.card:nth-child(1) { animation-delay: 0ms; }\n.card:nth-child(2) { animation-delay: ${state.delay}ms; }\n.card:nth-child(3) { animation-delay: ${state.delay * 2}ms; }\n/* ... stagger by ${state.delay}ms */`;
+        return `\n.card {\n  opacity: 0;\n  transform: ${state.direction === 'scale' ? 'scale(0.8)' : `translate${ state.direction === 'up' || state.direction === 'down' ? 'Y' : 'X'}(${state.direction === 'up' || state.direction === 'left' ? '30' : '-30'}px)`};\n  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;\n}\n\n.card:nth-child(1) { animation-delay: 0ms; }\n.card:nth-child(2) { animation-delay: ${state.delay}ms; }\n.card:nth-child(3) { animation-delay: ${state.delay * 2}ms; }\n`;
       },
       destroy() { this._container = null; }
     },
 
-
-    // ═══════════════════════════════════════════
-    // FLX-025: Neumorphism Button
-    // ═══════════════════════════════════════════
     {
       id: 'neumorphism-button',
       name: 'Neumorphism Button',
@@ -1537,9 +1445,6 @@
       destroy() { this._btn = null; this._container.style.background = ''; this._container = null; }
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-026: Liquid / Gooey Button
-    // ═══════════════════════════════════════════
     {
       id: 'gooey-button',
       name: 'Gooey Button',
@@ -1591,14 +1496,11 @@
         this._blobs.forEach(b => b.style.background = state.color);
       },
       getCode(state) {
-        return `.gooey-container { filter: url('#gooey-filter'); }\n/* See SVG filter definition in HTML */`;
+        return `.gooey-container { filter: url('#gooey-filter'); }\n`;
       },
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-027: Glitch Text Effect
-    // ═══════════════════════════════════════════
     {
       id: 'glitch-text',
       name: 'Glitch Text Effect',
@@ -1673,9 +1575,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-028: Typing Effect
-    // ═══════════════════════════════════════════
     {
       id: 'typing-effect',
       name: 'Typing Effect',
@@ -1730,9 +1629,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-029: Wavy Text
-    // ═══════════════════════════════════════════
     {
       id: 'wavy-text',
       name: 'Wavy Text',
@@ -1779,14 +1675,11 @@
         });
       },
       getCode(state) {
-        return `.wavy-text span {\n  display: inline-block;\n  animation: wave 1.5s ease-in-out infinite;\n}\n\n.wavy-text span:nth-child(1) { animation-delay: 0s; }\n.wavy-text span:nth-child(2) { animation-delay: ${state.delay}s; }\n.wavy-text span:nth-child(3) { animation-delay: ${state.delay * 2}s; }\n/* ... */\n\n@keyframes wave {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}`;
+        return `.wavy-text span {\n  display: inline-block;\n  animation: wave 1.5s ease-in-out infinite;\n}\n\n.wavy-text span:nth-child(1) { animation-delay: 0s; }\n.wavy-text span:nth-child(2) { animation-delay: ${state.delay}s; }\n.wavy-text span:nth-child(3) { animation-delay: ${state.delay * 2}s; }\n\n\n@keyframes wave {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}`;
       },
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-030: Magnetic Button
-    // ═══════════════════════════════════════════
     {
       id: 'magnetic-button',
       name: 'Magnetic Button',
@@ -1833,9 +1726,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-031: CSS 3D Cube
-    // ═══════════════════════════════════════════
     {
       id: 'css-3d-cube',
       name: 'CSS 3D Cube',
@@ -1889,14 +1779,11 @@
         this._faces.forEach(f => f.style.background = bg);
       },
       getCode(state) {
-        return `.scene { perspective: 600px; }\n.cube {\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotate 5s infinite linear;\n}\n.face {\n  position: absolute;\n  background: ${state.color}80;\n}\n/* Face transforms */\n.front { transform: translateZ(50px); }\n.back { transform: rotateY(180deg) translateZ(50px); }\n.right { transform: rotateY(90deg) translateZ(50px); }\n.left { transform: rotateY(-90deg) translateZ(50px); }\n.top { transform: rotateX(90deg) translateZ(50px); }\n.bottom { transform: rotateX(-90deg) translateZ(50px); }`;
+        return `.scene { perspective: 600px; }\n.cube {\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotate 5s infinite linear;\n}\n.face {\n  position: absolute;\n  background: ${state.color}80;\n}\n\n.front { transform: translateZ(50px); }\n.back { transform: rotateY(180deg) translateZ(50px); }\n.right { transform: rotateY(90deg) translateZ(50px); }\n.left { transform: rotateY(-90deg) translateZ(50px); }\n.top { transform: rotateX(90deg) translateZ(50px); }\n.bottom { transform: rotateX(-90deg) translateZ(50px); }`;
       },
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-032: Skeleton Loading
-    // ═══════════════════════════════════════════
     {
       id: 'skeleton-loading',
       name: 'Skeleton Loading',
@@ -1946,9 +1833,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-033: Animated Gradient Text
-    // ═══════════════════════════════════════════
     {
       id: 'gradient-text',
       name: 'Animated Gradient Text',
@@ -1990,9 +1874,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-034: Tooltip Hover
-    // ═══════════════════════════════════════════
     {
       id: 'tooltip-hover',
       name: 'Tooltip Hover',
@@ -2048,14 +1929,11 @@
         this._btn.classList.add(`pos-${state.position}`);
       },
       getCode(state) {
-        return `[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  opacity: 0;\n  transition: opacity 0.2s;\n  background: #333;\n  color: #fff;\n  padding: 4px 8px;\n  border-radius: 4px;\n  pointer-events: none;\n  /* Position: ${state.position} */\n}\n[data-tooltip]:hover::after { opacity: 1; }`;
+        return `[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  opacity: 0;\n  transition: opacity 0.2s;\n  background: #333;\n  color: #fff;\n  padding: 4px 8px;\n  border-radius: 4px;\n  pointer-events: none;\n  \n}\n[data-tooltip]:hover::after { opacity: 1; }`;
       },
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-035: Morphing Shape
-    // ═══════════════════════════════════════════
     {
       id: 'morphing-shape',
       name: 'Morphing Shape',
@@ -2097,9 +1975,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-036: Ripple Effect Button
-    // ═══════════════════════════════════════════
     {
       id: 'ripple-button',
       name: 'Ripple Effect',
@@ -2161,9 +2036,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-037: Expanding Search Bar
-    // ═══════════════════════════════════════════
     {
       id: 'expanding-search',
       name: 'Expanding Search',
@@ -2200,9 +2072,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-038: Hamburger Menu Animation
-    // ═══════════════════════════════════════════
     {
       id: 'hamburger-menu',
       name: 'Hamburger Menu',
@@ -2260,9 +2129,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-039: Shiny Hover Effect
-    // ═══════════════════════════════════════════
     {
       id: 'shiny-hover',
       name: 'Shiny Hover',
@@ -2315,9 +2181,6 @@
       destroy() {}
     },
 
-    // ═══════════════════════════════════════════
-    // FLX-040: Flip Card
-    // ═══════════════════════════════════════════
     {
       id: 'flip-card',
       name: '3D Flip Card',

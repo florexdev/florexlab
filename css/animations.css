@@ -1,9 +1,6 @@
-/* ==========================================================================
-   FLOREX.LAB — Animations
-   Keyframes, transitions, scroll reveal, micro-interactions
-   ========================================================================== */
+/* florex lab animasyonlar keyframes gecisler scroll reveal micro interactions */
 
-/* ── Keyframes ── */
+/* keyframes */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -160,7 +157,7 @@
   100% { text-shadow: 2px 0 var(--accent-red), -2px 0 var(--accent-blue); }
 }
 
-/* ── Scroll Reveal ── */
+/* scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -185,7 +182,6 @@
   transform: scale(1);
 }
 
-/* Staggered children */
 .stagger-children > * {
   opacity: 0;
   transform: translateY(16px);
@@ -210,7 +206,7 @@
   transform: translateY(0);
 }
 
-/* ── Easter Egg: Matrix / Glitch ── */
+/* gizli sürpriz easter egg matrix glitch */
 .easter-egg-overlay {
   position: fixed;
   inset: 0;

@@ -1,7 +1,4 @@
-/* ==========================================================================
-   FLOREX.LAB — Component Gallery
-   Renders all 16 custom UI components with previews, variants, and tabbed code (HTML, CSS, JS)
-   ========================================================================== */
+/* florex lab bilesen galerisi tum 16 ozel arayuz bilesenini onizlemeler varyantlar ve sekmeli html css js kodu ile olusturur */
 
 (function() {
   'use strict';
@@ -10,7 +7,7 @@
   if (!container) return;
 
   const components = [
-    // ── 1. Buttons ──
+    // ── 1. Butonlar ──
     {
       name: 'Buttons',
       description: 'Primary, secondary, ghost, danger, icon, loading, and size variants.',
@@ -29,7 +26,7 @@
       css: `.btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--space-2);\n  height: 40px;\n  padding: 0 var(--space-5);\n  font-size: var(--text-sm);\n  font-weight: var(--weight-medium);\n  border-radius: var(--radius-md);\n  border: 1px solid transparent;\n  cursor: pointer;\n  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);\n  white-space: nowrap;\n}\n\n.btn-primary {\n  background: var(--gradient-primary);\n  color: #fff;\n}\n.btn-primary:hover {\n  box-shadow: 0 4px 12px rgba(0,0,0,0.3), var(--shadow-glow-red);\n  transform: translateY(-1px);\n}\n\n.btn-secondary {\n  background: var(--surface);\n  color: var(--text-primary);\n  border-color: var(--border);\n}\n\n.btn-ghost {\n  background: transparent;\n  color: var(--text-secondary);\n}\n\n.btn-danger {\n  background: var(--accent-red);\n  color: #fff;\n}\n\n.btn-sm { height: 32px; padding: 0 12px; font-size: 0.75rem; }\n.btn-lg { height: 48px; padding: 0 24px; font-size: 1rem; }\n.btn-icon { width: 40px; padding: 0; }`
     },
 
-    // ── 2. Inputs ──
+    // ── 2. Girdiler ──
     {
       name: 'Inputs',
       description: 'Text inputs with focus, error, and disabled states.',
@@ -42,7 +39,7 @@
       css: `.input {\n  width: 100%;\n  height: 40px;\n  padding: 0 var(--space-3);\n  background: var(--bg-secondary);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-md);\n  color: var(--text-primary);\n  font-size: var(--text-sm);\n  transition: border-color 0.15s, box-shadow 0.15s;\n}\n\n.input:focus {\n  outline: none;\n  border-color: var(--accent-blue);\n  box-shadow: 0 0 0 3px var(--accent-blue-soft);\n}\n\n.input-error {\n  border-color: var(--accent-red);\n}\n\n.input:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}`
     },
 
-    // ── 3. Select ──
+    // ── 3. Seçim Kutusu ──
     {
       name: 'Select',
       description: 'Custom-styled select dropdowns.',
@@ -58,7 +55,7 @@
       css: `.select {\n  width: 100%;\n  height: 40px;\n  padding: 0 var(--space-8) 0 var(--space-3);\n  background: var(--bg-secondary);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-md);\n  color: var(--text-primary);\n  font-size: var(--text-sm);\n  cursor: pointer;\n  appearance: none;\n  background-image: url("data:image/svg+xml,...");\n  background-repeat: no-repeat;\n  background-position: right 12px center;\n}\n\n.select:focus {\n  outline: none;\n  border-color: var(--accent-blue);\n  box-shadow: 0 0 0 3px var(--accent-blue-soft);\n}`
     },
 
-    // ── 4. Checkbox ──
+    // ── 4. Onay Kutusu ──
     {
       name: 'Checkbox',
       description: 'Custom checkboxes with checked and disabled states.',
@@ -71,7 +68,7 @@
       css: `.checkbox-wrapper {\n  display: flex;\n  align-items: center;\n  gap: var(--space-3);\n  cursor: pointer;\n}\n\n.checkbox {\n  appearance: none;\n  width: 18px;\n  height: 18px;\n  border: 2px solid var(--border-hover);\n  border-radius: var(--radius-xs);\n  cursor: pointer;\n  position: relative;\n  transition: all 0.15s ease;\n}\n\n.checkbox:checked {\n  background: var(--accent-blue);\n  border-color: var(--accent-blue);\n}\n\n.checkbox:checked::after {\n  content: '';\n  position: absolute;\n  left: 4px;\n  top: 1px;\n  width: 6px;\n  height: 10px;\n  border: solid #fff;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg);\n}`
     },
 
-    // ── 5. Switch / Toggle ──
+    // ── 5. Anahtar / Toggle ──
     {
       name: 'Switch / Toggle',
       description: 'Toggle switches with on/off states.',
@@ -108,7 +105,7 @@
       js: `const switchEl = document.querySelector('.switch');\nswitchEl.addEventListener('click', () => {\n  const active = switchEl.classList.toggle('active');\n  switchEl.setAttribute('aria-checked', active);\n});`
     },
 
-    // ── 6. Slider ──
+    // ── 6. Kaydırıcı ──
     {
       name: 'Slider',
       description: 'Range input sliders with value display.',
@@ -137,7 +134,7 @@
       js: `const range = document.querySelector('.range');\nconst valDisplay = document.getElementById('val');\nrange.addEventListener('input', (e) => {\n  valDisplay.textContent = e.target.value;\n});`
     },
 
-    // ── 7. Badge ──
+    // ── 7. Rozet ──
     {
       name: 'Badge',
       description: 'Inline status badges with semantic color variants.',
@@ -152,7 +149,7 @@
       css: `.badge {\n  display: inline-flex;\n  align-items: center;\n  height: 22px;\n  padding: 0 var(--space-3);\n  font-size: 0.7rem;\n  font-weight: var(--weight-medium);\n  border-radius: var(--radius-full);\n}\n.badge-default { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border); }\n.badge-info { background: var(--accent-blue-soft); color: var(--accent-blue); }\n.badge-success { background: var(--accent-green-soft); color: var(--accent-green); }\n.badge-warning { background: var(--accent-yellow-soft); color: var(--accent-yellow); }\n.badge-danger { background: var(--accent-red-soft); color: var(--accent-red); }`
     },
 
-    // ── 8. Tooltip ──
+    // ── 8. Bilgi Balonu ──
     {
       name: 'Tooltip',
       description: 'Directional tooltips triggered on hover.',
@@ -170,7 +167,7 @@
       css: `.tooltip-trigger {\n  position: relative;\n  display: inline-block;\n}\n\n.tooltip {\n  position: absolute;\n  padding: 6px 12px;\n  font-size: 0.75rem;\n  font-weight: 500;\n  color: #fff;\n  background: var(--bg-tertiary);\n  border: 1px solid var(--border-hover);\n  border-radius: var(--radius-sm);\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity 0.15s, transform 0.15s;\n  z-index: 1000;\n}\n\n.tooltip-top {\n  bottom: calc(100% + 8px);\n  left: 50%;\n  transform: translateX(-50%) translateY(4px);\n}\n\n.tooltip-trigger:hover .tooltip-top {\n  opacity: 1;\n  transform: translateX(-50%) translateY(0);\n}`
     },
 
-    // ── 9. Toast ──
+    // ── 9. Bildirim (Toast) ──
     {
       name: 'Toast',
       description: 'Notification toasts with auto-dismiss and type variants.',
@@ -191,7 +188,7 @@
       js: `// Trigger toast programmatically\nFLX.toast.show({\n  title: 'Success',\n  message: 'Saved successfully.',\n  type: 'success', // info | success | warning | error\n  duration: 4000\n});`
     },
 
-    // ── 10. Modal ──
+    // ── 10. Diyalog (Modal) ──
     {
       name: 'Modal',
       description: 'Accessible modal dialog with focus trap and backdrop dismiss.',
@@ -214,7 +211,7 @@
       js: `// Open modal programmatically\nFLX.modal.show({\n  title: 'Modal Title',\n  body: '<p>Modal body HTML</p>',\n  footer: '<button onclick="FLX.modal.close()">Close</button>',\n  onClose: () => console.log('Closed')\n});`
     },
 
-    // ── 11. Dropdown ──
+    // ── 11. Açılır Menü ──
     {
       name: 'Dropdown',
       description: 'Click-triggered dropdown menu with items and separators.',
@@ -248,7 +245,7 @@
       js: `const trigger = document.querySelector('.dropdown-trigger');\nconst dropdown = document.querySelector('.dropdown');\n\ntrigger.addEventListener('click', (e) => {\n  e.stopPropagation();\n  dropdown.classList.toggle('open');\n});\n\ndocument.addEventListener('click', () => {\n  dropdown.classList.remove('open');\n});`
     },
 
-    // ── 12. Tabs ──
+    // ── 12. Sekmeler ──
     {
       name: 'Tabs',
       description: 'Tab navigation with animated active indicator.',
@@ -277,7 +274,7 @@
       js: `document.querySelectorAll('.tab').forEach(tab => {\n  tab.addEventListener('click', () => {\n    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));\n    tab.classList.add('active');\n  });\n});`
     },
 
-    // ── 13. Accordion ──
+    // ── 13. Akordiyon ──
     {
       name: 'Accordion',
       description: 'Collapsible content sections with smooth animation.',
@@ -317,7 +314,7 @@
       js: `trigger.addEventListener('click', () => {\n  const item = trigger.closest('.accordion-item');\n  const isOpen = item.classList.contains('open');\n  item.classList.toggle('open');\n  const content = item.querySelector('.accordion-content');\n  content.style.maxHeight = isOpen ? '0' : content.scrollHeight + 'px';\n});`
     },
 
-    // ── 14. Cards ──
+    // ── 14. Kartlar ──
     {
       name: 'Cards',
       description: 'Card containers with default and interactive hover variants.',
@@ -335,7 +332,7 @@
       css: `.card {\n  background: var(--surface);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-lg);\n  padding: var(--space-6);\n  transition: all 0.25s ease-out;\n}\n\n.card-interactive:hover {\n  transform: translateY(-2px);\n  border-color: var(--accent-red);\n  box-shadow: var(--shadow-lg), var(--shadow-glow-red);\n}`
     },
 
-    // ── 15. Loaders ──
+    // ── 15. Yükleyiciler ──
     {
       name: 'Loaders',
       description: 'Loading indicators: spinner, dots, bar, and skeleton.',
@@ -346,10 +343,10 @@
         <div style="width:160px;"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width:70%;"></div></div>
       `,
       html: `<!-- Spinner -->\n<div class="loader-spinner"></div>\n\n<!-- Dots -->\n<div class="loader-dots">\n  <span class="loader-dot"></span>\n  <span class="loader-dot"></span>\n  <span class="loader-dot"></span>\n</div>\n\n<!-- Bar -->\n<div class="loader-bar">\n  <div class="loader-bar-fill"></div>\n</div>\n\n<!-- Skeleton -->\n<div class="skeleton skeleton-text"></div>`,
-      css: `/* Spinner */\n.loader-spinner {\n  width: 24px;\n  height: 24px;\n  border: 3px solid var(--border);\n  border-top-color: var(--accent-blue);\n  border-radius: 50%;\n  animation: spin 0.7s linear infinite;\n}\n\n/* Dots */\n.loader-dot {\n  width: 8px;\n  height: 8px;\n  background: var(--accent-blue);\n  border-radius: 50%;\n  animation: dotPulse 1.4s ease-in-out infinite;\n}\n\n/* Skeleton */\n.skeleton {\n  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-hover) 50%, var(--surface) 75%);\n  background-size: 200% 100%;\n  animation: skeletonWave 1.5s ease-in-out infinite;\n}`
+      css: `\n.loader-spinner {\n  width: 24px;\n  height: 24px;\n  border: 3px solid var(--border);\n  border-top-color: var(--accent-blue);\n  border-radius: 50%;\n  animation: spin 0.7s linear infinite;\n}\n\n\n.loader-dot {\n  width: 8px;\n  height: 8px;\n  background: var(--accent-blue);\n  border-radius: 50%;\n  animation: dotPulse 1.4s ease-in-out infinite;\n}\n\n\n.skeleton {\n  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-hover) 50%, var(--surface) 75%);\n  background-size: 200% 100%;\n  animation: skeletonWave 1.5s ease-in-out infinite;\n}`
     },
 
-    // ── 16. Progress ──
+    // ── 16. İlerleme Çubuğu ──
     {
       name: 'Progress',
       description: 'Progress bar with gradient fill and animated transitions.',
@@ -373,7 +370,7 @@
       css: `.progress {\n  width: 100%;\n  height: 6px;\n  background: var(--bg-tertiary);\n  border-radius: 9999px;\n  overflow: hidden;\n}\n\n.progress-fill {\n  height: 100%;\n  background: var(--gradient-primary);\n  border-radius: 9999px;\n  transition: width 0.4s ease-out;\n}`
     },
 ,
-    // ── 9. Accordion ──
+    // ── 9. Akordiyon ──
     {
       name: 'Accordion',
       description: 'Collapsible content sections.',
@@ -392,7 +389,7 @@
       js: `document.querySelectorAll('.accordion-header').forEach(btn => {\n  btn.addEventListener('click', () => {\n    btn.parentElement.classList.toggle('active');\n  });\n});`
     },
 
-    // ── 10. Badges ──
+    // ── 10. Rozets ──
     {
       name: 'Badges',
       description: 'Small status tags or chips.',
@@ -421,7 +418,7 @@
       css: `.avatar-group { display: flex; padding-left: 10px; }\n.avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--bg); margin-left: -10px; object-fit: cover; }\n.avatar:hover { z-index: 10; transform: translateY(-2px); transition: transform 0.2s; }`
     },
 
-    // ── 12. Progress Bar ──
+    // ── 12. İlerleme Çubuğu Bar ──
     {
       name: 'Progress Bar',
       description: 'Linear progress indicators.',
@@ -471,7 +468,7 @@
       css: `.breadcrumbs { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-secondary); }\n.breadcrumbs a { color: inherit; text-decoration: none; transition: color 0.2s; }\n.breadcrumbs a:hover { color: var(--accent-blue); }\n.breadcrumbs .current { color: var(--text-primary); font-weight: 500; }`
     },
 
-    // ── 15. Toast Notification ──
+    // ── 15. Bildirim (Toast) Notification ──
     {
       name: 'Toast Notification',
       description: 'Floating alert messages.',
@@ -485,7 +482,7 @@
       css: `.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }\n.toast.show { transform: translateY(0); opacity: 1; }`
     },
 
-    // ── 16. Tabs ──
+    // ── 16. Sekmeler ──
     {
       name: 'Tabs',
       description: 'Horizontal tabbed navigation.',
@@ -527,7 +524,7 @@
     'Toast Notification': { name: 'Toast Bildirim', desc: 'Yüzen uyarı mesajları.' }
   };
 
-  /* ── Render Component Section ── */
+  /* bileşen bölümünü oluştur */
   function render() {
     container.innerHTML = '';
     const isTR = window.FLX && FLX.i18n && FLX.i18n.getCurrentLang() === 'tr';
@@ -579,7 +576,6 @@
 
       container.appendChild(section);
 
-      // Store code snippets on element for easy tab switching & copying
       const codeWrapper = section.querySelector('.component-code-wrapper');
       codeWrapper._codeData = {
         html: comp.html,
@@ -588,13 +584,11 @@
         activeTab: 'html'
       };
 
-      // Custom preview init
       if (comp.customInit) {
         const previewEl = section.querySelector(`#comp-preview-${index}`);
         comp.customInit(previewEl);
       }
 
-      // Code toggle open/close
       section.querySelector('.component-code-toggle').addEventListener('click', function(e) {
         if (e.target.closest('.copy-btn')) return;
         const content = document.getElementById(this.getAttribute('data-target'));
@@ -602,7 +596,6 @@
         this.setAttribute('aria-expanded', expanded);
       });
 
-      // Tab switcher
       section.querySelectorAll('.experiment-code-tab').forEach(tabBtn => {
         tabBtn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -612,18 +605,15 @@
 
           wrapper._codeData.activeTab = tabType;
 
-          // Update tab active classes
           wrapper.querySelectorAll('.experiment-code-tab').forEach(t => t.classList.remove('active'));
           tabBtn.classList.add('active');
 
-          // Update code content
           const codeEl = document.getElementById(`${targetId}-content`);
           const codeText = wrapper._codeData[tabType];
           codeEl.textContent = codeText;
         });
       });
 
-      // Copy button handler
       section.querySelector('.copy-btn').addEventListener('click', (e) => {
         e.stopPropagation();
         const wrapper = section.querySelector('.component-code-wrapper');
@@ -633,7 +623,6 @@
       });
     });
 
-    // Init scroll reveal
     setTimeout(() => FLX.initScrollReveal(), 100);
   }
 
