@@ -96,11 +96,16 @@
     if (route === 'experiments' && FLX.experiments) {
       FLX.experiments.closeViewer();
     }
+
+    // If navigating to editor, init the code editor
+    if (route === 'editor' && FLX.codeEditor) {
+      FLX.codeEditor.init();
+    }
   }
 
   function getRouteFromHash() {
     const hash = window.location.hash.replace('#', '');
-    const validRoutes = ['home', 'experiments', 'components', 'playground', 'about'];
+    const validRoutes = ['home', 'experiments', 'components', 'playground', 'editor', 'about'];
     return validRoutes.includes(hash) ? hash : 'home';
   }
 

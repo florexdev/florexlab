@@ -16,6 +16,7 @@
       'nav.experiments': 'Deneyler',
       'nav.components': 'Bileşenler',
       'nav.playground': 'Oyun Alanı',
+      'nav.editor': 'Kod Editörü',
       'nav.about': 'Hakkında',
       'nav.search': 'Arayın...',
 
@@ -65,6 +66,11 @@
       'pg.title': 'CSS Oyun Alanı',
       'pg.description': 'Canlı önizlemeli ve kopyalanabilir CSS kod çıktılı interaktif görsel jeneratörler.',
 
+      // Code Editor Section
+      'ce.label': 'Kod Editörü',
+      'ce.title': 'Canlı Kod Editörü',
+      'ce.description': 'HTML, CSS ve JavaScript kodlarını yazın ve anında canlı ön izleyin.',
+
       // About Section
       'about.label': 'Hakkında',
       'about.title': 'FLOREX.LAB Hakkında',
@@ -104,6 +110,7 @@
       'nav.experiments': 'Experiments',
       'nav.components': 'Components',
       'nav.playground': 'Playground',
+      'nav.editor': 'Code Editor',
       'nav.about': 'About',
       'nav.search': 'Search...',
 
@@ -152,6 +159,11 @@
       'pg.label': 'Playground',
       'pg.title': 'CSS Playground',
       'pg.description': 'Interactive visual generators with live preview and copyable CSS output.',
+
+      // Code Editor Section
+      'ce.label': 'Code Editor',
+      'ce.title': 'Live Code Editor',
+      'ce.description': 'Write HTML, CSS and JavaScript code and see a live preview instantly.',
 
       // About Section
       'about.label': 'About',
@@ -246,6 +258,9 @@
       }
       if (FLX.experiments && typeof FLX.experiments.init === 'function') {
         FLX.experiments.init();
+      }
+      if (FLX.codeEditor && typeof FLX.codeEditor.init === 'function') {
+        FLX.codeEditor.init();
       }
     }
   }

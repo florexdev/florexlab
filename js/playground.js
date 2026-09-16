@@ -152,6 +152,90 @@
         return `animation: ${animation} ${duration}s ${easing} ${delay}s ${iterVal};\n\n/* Keyframe animation: ${animation} */`;
       }
     },
+
+    // ── Neumorphism Generator ──
+    {
+      name: 'Neumorphism Generator',
+      description: 'Generate soft-UI CSS code.',
+      controls: [
+        { key: 'size', label: 'Size', type: 'range', min: 50, max: 200, default: 120, unit: 'px' },
+        { key: 'radius', label: 'Radius', type: 'range', min: 0, max: 100, default: 20, unit: 'px' },
+        { key: 'distance', label: 'Distance', type: 'range', min: 1, max: 30, default: 10, unit: 'px' },
+        { key: 'blur', label: 'Blur', type: 'range', min: 1, max: 60, default: 20, unit: 'px' },
+        { key: 'color', label: 'Base Color', type: 'color', default: '#e0e5ec' },
+      ],
+      render(previewEl, state) {
+        const { size, radius, distance, blur, color } = state;
+        previewEl.style.background = color;
+        previewEl.innerHTML = `
+          <div style="width:${size}px; height:${size}px; border-radius:${radius}px; background:${color}; box-shadow: ${distance}px ${distance}px ${blur}px rgba(163,177,198,0.6), -${distance}px -${distance}px ${blur}px rgba(255,255,255,0.8);"></div>
+        `;
+        return `border-radius: ${radius}px;\nbackground: ${color};\nbox-shadow: ${distance}px ${distance}px ${blur}px rgba(163,177,198,0.6),\n            -${distance}px -${distance}px ${blur}px rgba(255,255,255,0.8);`;
+      }
+    },
+
+    // ── CSS Filter Generator ──
+    {
+      name: 'CSS Filter Generator',
+      description: 'Adjust brightness, contrast, sepia, blur, etc.',
+      controls: [
+        { key: 'blur', label: 'Blur', type: 'range', min: 0, max: 20, default: 0, unit: 'px' },
+        { key: 'brightness', label: 'Brightness', type: 'range', min: 0, max: 200, default: 100, unit: '%' },
+        { key: 'contrast', label: 'Contrast', type: 'range', min: 0, max: 200, default: 100, unit: '%' },
+        { key: 'grayscale', label: 'Grayscale', type: 'range', min: 0, max: 100, default: 0, unit: '%' },
+        { key: 'hueRotate', label: 'Hue Rotate', type: 'range', min: 0, max: 360, default: 0, unit: 'deg' },
+      ],
+      render(previewEl, state) {
+        const { blur, brightness, contrast, grayscale, hueRotate } = state;
+        const filter = `blur(${blur}px) brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%) hue-rotate(${hueRotate}deg)`;
+        previewEl.innerHTML = `
+          <div style="width:100%; height:100%; min-height:180px; background:url('https://source.unsplash.com/random/400x300') center/cover; border-radius:12px; filter: ${filter};"></div>
+        `;
+        return `filter: ${filter};`;
+      }
+    },
+
+    // ── Transform Generator ──
+    {
+      name: 'Transform Generator',
+      description: 'Visual controls for rotate, scale, skew, translate.',
+      controls: [
+        { key: 'scale', label: 'Scale', type: 'range', min: 0.1, max: 2, default: 1, step: 0.1 },
+        { key: 'rotate', label: 'Rotate', type: 'range', min: 0, max: 360, default: 0, unit: 'deg' },
+        { key: 'translateX', label: 'Translate X', type: 'range', min: -100, max: 100, default: 0, unit: 'px' },
+        { key: 'translateY', label: 'Translate Y', type: 'range', min: -100, max: 100, default: 0, unit: 'px' },
+        { key: 'skewX', label: 'Skew X', type: 'range', min: -90, max: 90, default: 0, unit: 'deg' },
+      ],
+      render(previewEl, state) {
+        const { scale, rotate, translateX, translateY, skewX } = state;
+        const transform = `scale(${scale}) rotate(${rotate}deg) translate(${translateX}px, ${translateY}px) skewX(${skewX}deg)`;
+        previewEl.innerHTML = `
+          <div style="width:100px; height:100px; background:var(--gradient-primary); border-radius:12px; transform: ${transform}; transition: transform 0.2s;"></div>
+        `;
+        return `transform: ${transform};`;
+      }
+    },
+
+    // ── Text Shadow Generator ──
+    {
+      name: 'Text Shadow Generator',
+      description: 'Visual tool for creating text shadows.',
+      controls: [
+        { key: 'x', label: 'X Offset', type: 'range', min: -20, max: 20, default: 2, unit: 'px' },
+        { key: 'y', label: 'Y Offset', type: 'range', min: -20, max: 20, default: 2, unit: 'px' },
+        { key: 'blur', label: 'Blur', type: 'range', min: 0, max: 20, default: 4, unit: 'px' },
+        { key: 'color', label: 'Color', type: 'color', default: '#3b82f6' },
+      ],
+      render(previewEl, state) {
+        const { x, y, blur, color } = state;
+        const shadow = `${x}px ${y}px ${blur}px ${color}`;
+        previewEl.innerHTML = `
+          <div style="font-size:3rem; font-weight:bold; color:var(--text-primary); text-shadow: ${shadow};">TEXT</div>
+        `;
+        return `text-shadow: ${shadow};`;
+      }
+    },
+
   ];
 
   const toolDict = {
@@ -161,6 +245,11 @@
     'Glass Effect': { name: 'Cam Efekti', desc: 'Bulanıklık ve saydamlık ile glassmorphism CSS\'i üretin.' },
     'Color Playground': { name: 'Renk Dönüştürücü', desc: 'Renkleri seçin ve HEX, RGB, HSL arasında dönüştürün.' },
     'Animation Playground': { name: 'Animasyon Alanı', desc: 'CSS animasyon timing ve easing eğrileriyle deney yapın.' }
+    ,
+    'Neumorphism Generator': { name: 'Neumorfizm Jeneratörü', desc: 'Yumuşak UI (soft-UI) CSS kodları üretin.' },
+    'CSS Filter Generator': { name: 'CSS Filtre Jeneratörü', desc: 'Parlaklık, kontrast, sepia, bulanıklık gibi ayarları yapın.' },
+    'Transform Generator': { name: 'Dönüşüm (Transform) Jeneratörü', desc: 'Döndürme, ölçekleme ve çarpıtma için görsel kontroller.' },
+    'Text Shadow Generator': { name: 'Metin Gölgesi Jeneratörü', desc: 'Metin gölgeleri oluşturmak için görsel araç.' }
   };
 
   /* ── Render All Tools ── */

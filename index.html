@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/code-editor.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 
@@ -75,6 +76,7 @@
         <a class="nav-link" data-route="experiments" data-i18n="nav.experiments">Deneyler</a>
         <a class="nav-link" data-route="components" data-i18n="nav.components">Bileşenler</a>
         <a class="nav-link" data-route="playground" data-i18n="nav.playground">Oyun Alanı</a>
+        <a class="nav-link" data-route="editor" data-i18n="nav.editor">Kod Editörü</a>
         <a class="nav-link" data-route="about" data-i18n="nav.about">Hakkında</a>
       </nav>
 
@@ -155,6 +157,7 @@
     <a class="nav-link" data-route="experiments">Experiments</a>
     <a class="nav-link" data-route="components">Components</a>
     <a class="nav-link" data-route="playground">Playground</a>
+    <a class="nav-link" data-route="editor">Code Editor</a>
     <a class="nav-link" data-route="about">About</a>
     <div class="nav-divider"></div>
     <a class="nav-external" href="https://github.com/florexdev" target="_blank" rel="noopener noreferrer">
@@ -225,13 +228,13 @@
         <div class="hero-meta" aria-hidden="true">
           <div class="hero-meta-item">
             <span class="hero-meta-dot"></span>
-            <span>24 <span data-i18n="hero.statExperiments">Aktif Deney</span></span>
+            <span>40 <span data-i18n="hero.statExperiments">Aktif Deney</span></span>
           </div>
           <div class="hero-meta-item">
-            <span>16 <span data-i18n="hero.statComponents">UI Bileşeni</span></span>
+            <span>24 <span data-i18n="hero.statComponents">UI Bileşeni</span></span>
           </div>
           <div class="hero-meta-item">
-            <span>6 <span data-i18n="hero.statTools">CSS Aracı</span></span>
+            <span>10 <span data-i18n="hero.statTools">CSS Aracı</span></span>
           </div>
           <div class="hero-meta-item">
             <span>v1.0</span>
@@ -333,6 +336,20 @@
             jeneratörler.</p>
         </div>
         <div class="playground-grid stagger-children" id="playground-tools">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CODE EDITOR ═══════════ -->
+    <section class="section" id="section-editor" data-section="editor">
+      <div class="container" style="padding-top:calc(var(--navbar-height) + var(--space-12));">
+        <div class="section-header reveal">
+          <span class="section-label" data-i18n="nav.editor">Kod Editörü</span>
+          <h2 data-i18n="ce.title">Canlı Kod Editörü</h2>
+          <p data-i18n="ce.description">HTML, CSS ve JavaScript kodlarını yazın ve anında canlı ön izleyin.</p>
+        </div>
+        <div id="code-editor-content" class="reveal">
           <!-- Rendered by JS -->
         </div>
       </div>
@@ -488,6 +505,7 @@
   <script src="js/experiments.js"></script>
   <script src="js/components-gallery.js"></script>
   <script src="js/playground.js"></script>
+  <script src="js/code-editor.js"></script>
   <script src="js/main.js"></script>
 </body>
 

@@ -372,6 +372,133 @@
       html: `<div class="progress">\n  <div class="progress-fill" style="width: 75%;"></div>\n</div>`,
       css: `.progress {\n  width: 100%;\n  height: 6px;\n  background: var(--bg-tertiary);\n  border-radius: 9999px;\n  overflow: hidden;\n}\n\n.progress-fill {\n  height: 100%;\n  background: var(--gradient-primary);\n  border-radius: 9999px;\n  transition: width 0.4s ease-out;\n}`
     },
+,
+    // ── 9. Accordion ──
+    {
+      name: 'Accordion',
+      description: 'Collapsible content sections.',
+      preview: `
+        <div class="accordion" style="width: 100%;">
+          <div class="accordion-item" style="border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 8px;">
+            <div class="accordion-header" style="padding: 12px 16px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;">Item 1 <span>+</span></div>
+          </div>
+          <div class="accordion-item" style="border: 1px solid var(--border); border-radius: var(--radius-md);">
+            <div class="accordion-header" style="padding: 12px 16px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;">Item 2 <span>+</span></div>
+          </div>
+        </div>
+      `,
+      html: `<div class="accordion">\n  <div class="accordion-item">\n    <button class="accordion-header">Title</button>\n    <div class="accordion-content">Content here</div>\n  </div>\n</div>`,
+      css: `.accordion-item { border: 1px solid var(--border); margin-bottom: 8px; border-radius: 8px; overflow: hidden; }\n.accordion-header { padding: 16px; width: 100%; text-align: left; background: var(--surface); border: none; cursor: pointer; font-weight: 500; }\n.accordion-content { padding: 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }\n.accordion-item.active .accordion-content { padding: 16px; max-height: 200px; }`,
+      js: `document.querySelectorAll('.accordion-header').forEach(btn => {\n  btn.addEventListener('click', () => {\n    btn.parentElement.classList.toggle('active');\n  });\n});`
+    },
+
+    // ── 10. Badges ──
+    {
+      name: 'Badges',
+      description: 'Small status tags or chips.',
+      preview: `
+        <span class="badge badge-primary">Primary</span>
+        <span class="badge badge-secondary">Secondary</span>
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-danger">Danger</span>
+      `,
+      html: `<span class="badge badge-primary">Primary</span>\n<span class="badge badge-success">Success</span>`,
+      css: `.badge { display: inline-flex; align-items: center; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; border-radius: 9999px; }\n.badge-primary { background: var(--accent-blue-soft); color: var(--accent-blue); }\n.badge-secondary { background: var(--surface-hover); color: var(--text-secondary); }\n.badge-success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }\n.badge-danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; }`
+    },
+
+    // ── 11. Avatar Group ──
+    {
+      name: 'Avatar Group',
+      description: 'Overlapping user profile images.',
+      preview: `
+        <div class="avatar-group" style="display: flex;">
+          <div class="avatar" style="width: 40px; height: 40px; border-radius: 50%; background: #e53e6b; border: 2px solid var(--bg); margin-left: -10px; z-index: 3;"></div>
+          <div class="avatar" style="width: 40px; height: 40px; border-radius: 50%; background: #3b82f6; border: 2px solid var(--bg); margin-left: -10px; z-index: 2;"></div>
+          <div class="avatar" style="width: 40px; height: 40px; border-radius: 50%; background: #8b5cf6; border: 2px solid var(--bg); margin-left: -10px; z-index: 1;"></div>
+        </div>
+      `,
+      html: `<div class="avatar-group">\n  <img src="img1.jpg" class="avatar">\n  <img src="img2.jpg" class="avatar">\n  <img src="img3.jpg" class="avatar">\n</div>`,
+      css: `.avatar-group { display: flex; padding-left: 10px; }\n.avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--bg); margin-left: -10px; object-fit: cover; }\n.avatar:hover { z-index: 10; transform: translateY(-2px); transition: transform 0.2s; }`
+    },
+
+    // ── 12. Progress Bar ──
+    {
+      name: 'Progress Bar',
+      description: 'Linear progress indicators.',
+      preview: `
+        <div style="width: 100%; max-width: 300px;">
+          <div class="progress" style="width: 100%; height: 8px; background: var(--surface-hover); border-radius: 4px; overflow: hidden; margin-bottom: 12px;">
+            <div class="progress-bar" style="width: 65%; height: 100%; background: var(--gradient-primary);"></div>
+          </div>
+          <div class="progress" style="width: 100%; height: 8px; background: var(--surface-hover); border-radius: 4px; overflow: hidden;">
+            <div class="progress-bar" style="width: 30%; height: 100%; background: var(--accent-red);"></div>
+          </div>
+        </div>
+      `,
+      html: `<div class="progress">\n  <div class="progress-bar" style="width: 65%"></div>\n</div>`,
+      css: `.progress { width: 100%; height: 8px; background: var(--surface-hover); border-radius: 4px; overflow: hidden; }\n.progress-bar { height: 100%; background: var(--gradient-primary); transition: width 0.3s ease; }`
+    },
+
+    // ── 13. Pagination ──
+    {
+      name: 'Pagination',
+      description: 'Page navigation controls.',
+      preview: `
+        <div class="pagination" style="display: flex; gap: 4px;">
+          <button class="btn btn-ghost btn-sm" disabled>&lt;</button>
+          <button class="btn btn-primary btn-sm">1</button>
+          <button class="btn btn-ghost btn-sm">2</button>
+          <button class="btn btn-ghost btn-sm">3</button>
+          <button class="btn btn-ghost btn-sm">&gt;</button>
+        </div>
+      `,
+      html: `<nav class="pagination">\n  <button class="page-btn" disabled>Prev</button>\n  <button class="page-btn active">1</button>\n  <button class="page-btn">2</button>\n  <button class="page-btn">3</button>\n  <button class="page-btn">Next</button>\n</nav>`,
+      css: `.pagination { display: flex; gap: 4px; }\n.page-btn { padding: 4px 12px; border: 1px solid transparent; background: transparent; color: var(--text-primary); border-radius: 6px; cursor: pointer; }\n.page-btn:hover { background: var(--surface-hover); }\n.page-btn.active { background: var(--accent-blue); color: white; }\n.page-btn:disabled { opacity: 0.5; cursor: not-allowed; }`
+    },
+
+    // ── 14. Breadcrumbs ──
+    {
+      name: 'Breadcrumbs',
+      description: 'Navigation path.',
+      preview: `
+        <div class="breadcrumbs" style="display: flex; gap: 8px; font-size: 0.875rem; color: var(--text-secondary);">
+          <span>Home</span> <span>/</span>
+          <span>Library</span> <span>/</span>
+          <span style="color: var(--text-primary);">Data</span>
+        </div>
+      `,
+      html: `<nav class="breadcrumbs">\n  <a href="#">Home</a>\n  <span class="separator">/</span>\n  <a href="#">Library</a>\n  <span class="separator">/</span>\n  <span class="current">Data</span>\n</nav>`,
+      css: `.breadcrumbs { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-secondary); }\n.breadcrumbs a { color: inherit; text-decoration: none; transition: color 0.2s; }\n.breadcrumbs a:hover { color: var(--accent-blue); }\n.breadcrumbs .current { color: var(--text-primary); font-weight: 500; }`
+    },
+
+    // ── 15. Toast Notification ──
+    {
+      name: 'Toast Notification',
+      description: 'Floating alert messages.',
+      preview: `
+        <div class="toast" style="padding: 12px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+          <span style="color: #22c55e;">✓</span>
+          <span style="font-size: 0.875rem;">Action completed successfully.</span>
+        </div>
+      `,
+      html: `<div class="toast show">\n  <span class="toast-icon">✓</span>\n  <span class="toast-msg">Successfully saved!</span>\n</div>`,
+      css: `.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }\n.toast.show { transform: translateY(0); opacity: 1; }`
+    },
+
+    // ── 16. Tabs ──
+    {
+      name: 'Tabs',
+      description: 'Horizontal tabbed navigation.',
+      preview: `
+        <div class="tabs" style="display: flex; border-bottom: 1px solid var(--border); gap: 16px;">
+          <div style="padding: 8px 4px; color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); font-weight: 500;">Tab 1</div>
+          <div style="padding: 8px 4px; color: var(--text-secondary);">Tab 2</div>
+          <div style="padding: 8px 4px; color: var(--text-secondary);">Tab 3</div>
+        </div>
+      `,
+      html: `<div class="tabs">\n  <button class="tab active">Profile</button>\n  <button class="tab">Settings</button>\n  <button class="tab">Messages</button>\n</div>`,
+      css: `.tabs { display: flex; border-bottom: 1px solid var(--border); gap: 16px; }\n.tab { padding: 8px 4px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }\n.tab:hover { color: var(--text-primary); }\n.tab.active { color: var(--text-primary); border-bottom-color: var(--accent-blue); font-weight: 500; }`
+    }
   ];
 
   const compDict = {
@@ -391,6 +518,13 @@
     'Cards': { name: 'Kartlar', desc: 'Varsayılan ve hover kaldırma varyasyonlu kart kapsayıcıları.' },
     'Loaders': { name: 'Yükleyiciler', desc: 'Yükleme göstergeleri: spinner, noktalar, çubuk ve iskelet.' },
     'Progress': { name: 'İlerleme Çubuğu', desc: 'Gradient dolgulu ve animasyonlu ilerleme çubuğu.' }
+,
+    'Badges': { name: 'Rozetler', desc: 'Küçük durum etiketleri veya çipler.' },
+    'Avatar Group': { name: 'Avatar Grubu', desc: 'Üst üste binen kullanıcı profil resimleri.' },
+    'Progress Bar': { name: 'İlerleme Çubuğu (Doğrusal)', desc: 'Doğrusal ilerleme göstergeleri.' },
+    'Pagination': { name: 'Sayfalama', desc: 'Sayfa gezinme kontrolleri.' },
+    'Breadcrumbs': { name: 'Gezinme Yolu', desc: 'Sayfa hiyerarşisi navigasyonu.' },
+    'Toast Notification': { name: 'Toast Bildirim', desc: 'Yüzen uyarı mesajları.' }
   };
 
   /* ── Render Component Section ── */

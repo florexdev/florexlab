@@ -22,6 +22,7 @@
     { id: 'nav-experiments', label: 'Experiments', group: 'Navigation', icon: 'zap', action: () => FLX.navigate('experiments') },
     { id: 'nav-components', label: 'Components', group: 'Navigation', icon: 'layout', action: () => FLX.navigate('components') },
     { id: 'nav-playground', label: 'Playground', group: 'Navigation', icon: 'play', action: () => FLX.navigate('playground') },
+    { id: 'nav-editor', label: 'Code Editor', group: 'Navigation', icon: 'code', action: () => FLX.navigate('editor') },
     { id: 'nav-about', label: 'About', group: 'Navigation', icon: 'info', action: () => FLX.navigate('about') },
 
     // Actions

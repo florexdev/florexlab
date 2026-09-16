@@ -75,7 +75,23 @@
     'magnetic-button': { name: 'Manyetik Buton', desc: 'İmleç yaklaştıkça butonu kendine çeken manyetik etkileşim.' },
     'scroll-reveal': { name: 'Kaydırma Belirmesi', desc: 'IntersectionObserver ile tetiklenen kaydırma animasyonları.' },
     'text-animation': { name: 'Metin Animasyonları', desc: 'Dalga, glitch ve zıplama metin efektleri.' },
-    'staggered-cards': { name: 'Kademeli Kartlar', desc: 'Aşamalı giriş animasyonlu ızgara kartları.' }
+    'staggered-cards': { name: 'Kademeli Kartlar', desc: 'Aşamalı giriş animasyonlu ızgara kartları.' },
+    'neumorphism-button': { name: 'Neumorfizm Buton', desc: 'Fiziksel butonları taklit eden yumuşak UI ögesi.' },
+    'gooey-button': { name: 'Sıvı (Gooey) Buton', desc: 'SVG filtre tabanlı sıvı/akışkan efekti.' },
+    'glitch-text': { name: 'Glitch Metin', desc: 'clip-path kullanan CSS bozulma animasyonu.' },
+    'typing-effect': { name: 'Daktilo Efekti', desc: 'Yazı yazma animasyonu için CSS steps() kullanımı.' },
+    'wavy-text': { name: 'Dalgalı Metin', desc: 'Metinler için gecikme tabanlı dalga animasyonu.' },
+    'magnetic-button': { name: 'Manyetik Buton', desc: 'İmleci hafifçe takip eden JS destekli buton.' },
+    'css-3d-cube': { name: 'CSS 3D Küp', desc: 'CSS transformları ile dönen 3D küp.' },
+    'skeleton-loading': { name: 'İskelet Yükleyici', desc: 'Yükleme durumları için parlama efekti.' },
+    'gradient-text': { name: 'Animasyonlu Gradyan Metin', desc: 'Kırpılmış metin üzerinde akan gradyan.' },
+    'tooltip-hover': { name: 'Hover Bilgi Balonu', desc: 'Üzerine gelindiğinde çıkan saf CSS bilgi balonları.' },
+    'morphing-shape': { name: 'Şekil Değiştirici', desc: 'Animasyonlu karmaşık kenar yuvarlama (border-radius).' },
+    'ripple-button': { name: 'Dalga Efektli Buton', desc: 'JS ve CSS kullanan tıklama dalgası efekti.' },
+    'expanding-search': { name: 'Genişleyen Arama', desc: 'Odaklanıldığında genişleyen arama çubuğu.' },
+    'hamburger-menu': { name: 'Hamburger Menü', desc: 'Menü ikonundan çarpı işaretine CSS geçişi.' },
+    'shiny-hover': { name: 'Parlak Hover', desc: 'Üzerine gelindiğinde ögenin üstünden geçen parlama.' },
+    'flip-card': { name: '3D Dönen Kart', desc: 'Üzerine gelindiğinde dönen 3 boyutlu kart.' }
   };
 
   /* ── Render Card ── */

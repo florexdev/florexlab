@@ -1483,6 +1483,9 @@
   color: var(--text-secondary);
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-out);
+  background: transparent;
+  border: none;
+  user-select: none;
 }
 
 .component-code-toggle:hover {
@@ -1496,7 +1499,8 @@
 }
 
 .component-code-content.open {
-  max-height: 500px;
+  max-height: 600px;
+  overflow: visible;
 }
 
 .component-code-content pre {
@@ -1505,6 +1509,77 @@
   border: none;
   border-top: 1px solid var(--border);
   font-size: var(--text-xs);
+  max-height: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-6);
+  background: var(--bg-tertiary);
+  position: relative;
+}
+
+.component-code-content pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.component-code-content pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.component-code-content pre::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+.component-code-content pre::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.component-code-content pre code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.65;
+  color: var(--text-primary);
+  white-space: pre;
+  display: block;
+}
+
+/* ── Component code header with copy button ── */
+.component-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--surface-hover);
+  border-bottom: 1px solid var(--border);
+}
+
+.component-code-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: var(--weight-medium);
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.component-code-copy-btn:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+
+.component-code-copy-btn.copied {
+  color: var(--retro-green);
+  border-color: var(--retro-green);
 }
 
 /* ── Empty State ── */

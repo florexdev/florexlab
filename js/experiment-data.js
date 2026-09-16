@@ -1490,6 +1490,883 @@
       destroy() { this._container = null; }
     },
 
+
+    // ═══════════════════════════════════════════
+    // FLX-025: Neumorphism Button
+    // ═══════════════════════════════════════════
+    {
+      id: 'neumorphism-button',
+      name: 'Neumorphism Button',
+      description: 'Soft UI element mimicking physical buttons.',
+      category: 'CSS',
+      tags: ['css', 'neumorphism', 'button', 'shadow'],
+      status: 'active',
+      number: 'FLX-025',
+      controls: [
+        { type: 'color', key: 'bgColor', label: 'Background', default: '#e0e5ec' },
+        { type: 'range', key: 'distance', label: 'Distance', min: 2, max: 20, default: 9, unit: 'px' },
+        { type: 'range', key: 'blur', label: 'Blur', min: 5, max: 40, default: 18, unit: 'px' },
+      ],
+      init(container, state) {
+        const btn = document.createElement('button');
+        btn.style.cssText = 'padding: 16px 32px; border: none; border-radius: 50px; font-weight: bold; font-family: inherit; color: #4a5568; cursor: pointer; transition: all 0.2s ease; outline: none;';
+        btn.textContent = 'Neumorphic';
+        container.style.transition = 'background 0.3s ease';
+        container.appendChild(btn);
+        
+        btn.onmousedown = () => {
+          btn.style.boxShadow = `inset ${state.distance}px ${state.distance}px ${state.blur}px rgba(163,177,198,0.6), inset -${state.distance}px -${state.distance}px ${state.blur}px rgba(255,255,255,0.8)`;
+        };
+        btn.onmouseup = () => { this.update(state); };
+        btn.onmouseleave = () => { this.update(state); };
+
+        this._btn = btn;
+        this._container = container;
+        this.update(state);
+      },
+      update(state) {
+        const { bgColor, distance, blur } = state;
+        this._container.style.background = bgColor;
+        this._btn.style.background = bgColor;
+        this._btn.style.boxShadow = `${distance}px ${distance}px ${blur}px rgba(163,177,198,0.6), -${distance}px -${distance}px ${blur}px rgba(255,255,255,0.8)`;
+      },
+      getCode(state) {
+        const { bgColor, distance, blur } = state;
+        return `button {\n  background: ${bgColor};\n  border-radius: 50px;\n  box-shadow: ${distance}px ${distance}px ${blur}px rgba(163,177,198,0.6),\n              -${distance}px -${distance}px ${blur}px rgba(255,255,255,0.8);\n}\n\nbutton:active {\n  box-shadow: inset ${distance}px ${distance}px ${blur}px rgba(163,177,198,0.6),\n              inset -${distance}px -${distance}px ${blur}px rgba(255,255,255,0.8);\n}`;
+      },
+      destroy() { this._btn = null; this._container.style.background = ''; this._container = null; }
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-026: Liquid / Gooey Button
+    // ═══════════════════════════════════════════
+    {
+      id: 'gooey-button',
+      name: 'Gooey Button',
+      description: 'SVG filter-based liquid gooey effect.',
+      category: 'SVG',
+      tags: ['svg', 'filter', 'gooey', 'button'],
+      status: 'active',
+      number: 'FLX-026',
+      controls: [
+        { type: 'color', key: 'color', label: 'Color', default: '#8b5cf6' },
+      ],
+      init(container, state) {
+        container.innerHTML = `
+          <svg style="width:0;height:0;position:absolute;">
+            <defs>
+              <filter id="gooey-filter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+              </filter>
+            </defs>
+          </svg>
+          <div class="goo-wrapper" style="filter: url('#gooey-filter'); position: relative;">
+            <button class="goo-btn" style="padding: 16px 32px; border: none; border-radius: 30px; font-weight: bold; color: white; cursor: pointer; position: relative; z-index: 2; transition: transform 0.2s;">Gooey Button</button>
+            <div class="goo-blob" style="position: absolute; top: 0; left: 10px; width: 40px; height: 40px; border-radius: 50%; z-index: 1; transition: all 0.5s ease;"></div>
+            <div class="goo-blob" style="position: absolute; top: 0; right: 10px; width: 40px; height: 40px; border-radius: 50%; z-index: 1; transition: all 0.6s ease;"></div>
+          </div>
+        `;
+        
+        const wrapper = container.querySelector('.goo-wrapper');
+        const btn = container.querySelector('.goo-btn');
+        const blobs = container.querySelectorAll('.goo-blob');
+        
+        wrapper.onmouseenter = () => {
+          blobs[0].style.transform = 'translate(-20px, -20px) scale(1.5)';
+          blobs[1].style.transform = 'translate(20px, 20px) scale(1.5)';
+        };
+        wrapper.onmouseleave = () => {
+          blobs[0].style.transform = 'translate(0, 0) scale(1)';
+          blobs[1].style.transform = 'translate(0, 0) scale(1)';
+        };
+
+        this._btn = btn;
+        this._blobs = blobs;
+        this.update(state);
+      },
+      update(state) {
+        this._btn.style.background = state.color;
+        this._blobs.forEach(b => b.style.background = state.color);
+      },
+      getCode(state) {
+        return `.gooey-container { filter: url('#gooey-filter'); }\n/* See SVG filter definition in HTML */`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-027: Glitch Text Effect
+    // ═══════════════════════════════════════════
+    {
+      id: 'glitch-text',
+      name: 'Glitch Text Effect',
+      description: 'CSS animation glitch effect using clip-path.',
+      category: 'CSS',
+      tags: ['css', 'text', 'glitch', 'animation'],
+      status: 'active',
+      number: 'FLX-027',
+      controls: [
+        { type: 'color', key: 'color1', label: 'Glitch Color 1', default: '#0ff' },
+        { type: 'color', key: 'color2', label: 'Glitch Color 2', default: '#f0f' },
+      ],
+      init(container, state) {
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'font-size: 3rem; font-weight: 900; position: relative; font-family: monospace; color: var(--text-primary);';
+        wrapper.dataset.text = 'GLITCH';
+        wrapper.textContent = 'GLITCH';
+        
+        const style = document.createElement('style');
+        style.id = 'glitch-style';
+        container.appendChild(style);
+        container.appendChild(wrapper);
+        
+        this._style = style;
+        this.update(state);
+      },
+      update(state) {
+        this._style.textContent = `
+          .glitch-demo::before, .glitch-demo::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+          }
+          .glitch-demo::before {
+            left: 2px;
+            text-shadow: -2px 0 ${state.color1};
+            clip-path: inset(24px 0 32px 0);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+          }
+          .glitch-demo::after {
+            left: -2px;
+            text-shadow: -2px 0 ${state.color2};
+            clip-path: inset(12px 0 58px 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+          }
+          @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20px 0 80px 0); }
+            20% { clip-path: inset(60px 0 10px 0); }
+            40% { clip-path: inset(10px 0 50px 0); }
+            60% { clip-path: inset(80px 0 5px 0); }
+            80% { clip-path: inset(30px 0 40px 0); }
+            100% { clip-path: inset(50px 0 30px 0); }
+          }
+          @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10px 0 60px 0); }
+            20% { clip-path: inset(30px 0 20px 0); }
+            40% { clip-path: inset(70px 0 10px 0); }
+            60% { clip-path: inset(20px 0 50px 0); }
+            80% { clip-path: inset(90px 0 5px 0); }
+            100% { clip-path: inset(5px 0 80px 0); }
+          }
+        `;
+        this._style.nextElementSibling.className = 'glitch-demo';
+      },
+      getCode(state) {
+        return `.glitch {\n  position: relative;\n}\n.glitch::before,\n.glitch::after {\n  content: attr(data-text);\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n.glitch::before {\n  left: 2px;\n  text-shadow: -2px 0 ${state.color1};\n  animation: glitch-1 2s infinite;\n}\n.glitch::after {\n  left: -2px;\n  text-shadow: -2px 0 ${state.color2};\n  animation: glitch-2 3s infinite;\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-028: Typing Effect
+    // ═══════════════════════════════════════════
+    {
+      id: 'typing-effect',
+      name: 'Typing Effect',
+      description: 'CSS steps() animation for typing text.',
+      category: 'CSS',
+      tags: ['css', 'text', 'typing', 'animation'],
+      status: 'active',
+      number: 'FLX-028',
+      controls: [
+        { type: 'range', key: 'steps', label: 'Characters', min: 5, max: 30, default: 14, unit: 'ch' },
+        { type: 'range', key: 'duration', label: 'Duration', min: 1, max: 10, default: 3, step: 0.5, unit: 's' },
+      ],
+      init(container, state) {
+        const text = document.createElement('div');
+        text.style.cssText = 'font-family: monospace; font-size: 1.5rem; white-space: nowrap; overflow: hidden; border-right: 3px solid var(--text-primary);';
+        text.textContent = 'Hello, World!';
+        container.appendChild(text);
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-ghost btn-sm';
+        btn.style.marginTop = '20px';
+        btn.innerHTML = FLX.icon('refresh') + ' Replay';
+        btn.onclick = () => {
+          text.style.animation = 'none';
+          text.offsetHeight;
+          this.update(state);
+        };
+        container.appendChild(btn);
+
+        this._text = text;
+        this.update(state);
+      },
+      update(state) {
+        const { steps, duration } = state;
+        this._text.style.width = `${steps}ch`;
+        this._text.style.animation = `typing ${duration}s steps(${steps}) forwards, blink .5s step-end infinite alternate`;
+        
+        if (!document.getElementById('typing-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'typing-keyframes';
+          style.textContent = `
+            @keyframes typing { from { width: 0 } }
+            @keyframes blink { 50% { border-color: transparent } }
+          `;
+          document.head.appendChild(style);
+        }
+      },
+      getCode(state) {
+        const { steps, duration } = state;
+        return `.typewriter {\n  overflow: hidden;\n  border-right: .15em solid orange;\n  white-space: nowrap;\n  margin: 0 auto;\n  letter-spacing: .15em;\n  animation: \n    typing ${duration}s steps(${steps}, end),\n    blink-caret .75s step-end infinite;\n}\n\n@keyframes typing {\n  from { width: 0 }\n  to { width: 100% }\n}\n@keyframes blink-caret {\n  from, to { border-color: transparent }\n  50% { border-color: orange; }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-029: Wavy Text
+    // ═══════════════════════════════════════════
+    {
+      id: 'wavy-text',
+      name: 'Wavy Text',
+      description: 'Delay-based staggered wave animation for text.',
+      category: 'CSS',
+      tags: ['css', 'text', 'wave', 'animation'],
+      status: 'active',
+      number: 'FLX-029',
+      controls: [
+        { type: 'range', key: 'delay', label: 'Stagger Delay', min: 0.05, max: 0.3, default: 0.1, step: 0.01, unit: 's' },
+      ],
+      init(container, state) {
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'display: flex; font-size: 2rem; font-weight: bold;';
+        
+        const word = "FLOREX";
+        word.split('').forEach((char, i) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.display = 'inline-block';
+          span.style.animation = 'wave 1.5s ease-in-out infinite';
+          wrapper.appendChild(span);
+        });
+        
+        if (!document.getElementById('wave-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'wave-keyframes';
+          style.textContent = `
+            @keyframes wave {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-15px); }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+
+        container.appendChild(wrapper);
+        this._spans = wrapper.querySelectorAll('span');
+        this.update(state);
+      },
+      update(state) {
+        this._spans.forEach((span, i) => {
+          span.style.animationDelay = `${i * state.delay}s`;
+        });
+      },
+      getCode(state) {
+        return `.wavy-text span {\n  display: inline-block;\n  animation: wave 1.5s ease-in-out infinite;\n}\n\n.wavy-text span:nth-child(1) { animation-delay: 0s; }\n.wavy-text span:nth-child(2) { animation-delay: ${state.delay}s; }\n.wavy-text span:nth-child(3) { animation-delay: ${state.delay * 2}s; }\n/* ... */\n\n@keyframes wave {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-030: Magnetic Button
+    // ═══════════════════════════════════════════
+    {
+      id: 'magnetic-button',
+      name: 'Magnetic Button',
+      description: 'Button that follows the cursor slightly using JS.',
+      category: 'JavaScript',
+      tags: ['js', 'button', 'interactive'],
+      status: 'active',
+      number: 'FLX-030',
+      controls: [
+        { type: 'range', key: 'strength', label: 'Pull Strength', min: 10, max: 100, default: 40, unit: 'px' },
+      ],
+      init(container, state) {
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'padding: 40px; display: inline-block;';
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-primary';
+        btn.textContent = 'Hover Me';
+        btn.style.transition = 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)';
+        
+        wrapper.appendChild(btn);
+        container.appendChild(wrapper);
+        
+        wrapper.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / (rect.width / 2);
+          const dy = (e.clientY - cy) / (rect.height / 2);
+          
+          btn.style.transform = `translate(${dx * state.strength}px, ${dy * state.strength}px)`;
+        });
+        
+        wrapper.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0, 0)';
+        });
+        
+        this._btn = btn;
+      },
+      update(state) {},
+      getCode(state) {
+        return `const btn = document.querySelector('.magnetic-btn');\nconst wrapper = document.querySelector('.wrapper');\n\nwrapper.addEventListener('mousemove', (e) => {\n  const rect = btn.getBoundingClientRect();\n  const cx = rect.left + rect.width / 2;\n  const cy = rect.top + rect.height / 2;\n  const dx = (e.clientX - cx) / (rect.width / 2);\n  const dy = (e.clientY - cy) / (rect.height / 2);\n  \n  btn.style.transform = \`translate(\${dx * ${state.strength}}px, \${dy * ${state.strength}}px)\`;\n});\n\nwrapper.addEventListener('mouseleave', () => {\n  btn.style.transform = 'translate(0, 0)';\n});`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-031: CSS 3D Cube
+    // ═══════════════════════════════════════════
+    {
+      id: 'css-3d-cube',
+      name: 'CSS 3D Cube',
+      description: 'Rotating 3D cube with CSS transforms.',
+      category: 'CSS',
+      tags: ['css', '3d', 'transform', 'animation'],
+      status: 'active',
+      number: 'FLX-031',
+      controls: [
+        { type: 'color', key: 'color', label: 'Color', default: '#3b82f6' },
+      ],
+      init(container, state) {
+        container.style.perspective = '600px';
+        const cube = document.createElement('div');
+        cube.style.cssText = 'width: 100px; height: 100px; position: relative; transform-style: preserve-3d; animation: rotateCube 5s infinite linear;';
+        
+        const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
+        faces.forEach(face => {
+          const div = document.createElement('div');
+          div.style.cssText = 'position: absolute; width: 100px; height: 100px; background: rgba(59, 130, 246, 0.5); border: 2px solid white; display: flex; align-items: center; justify-content: center; font-family: monospace; color: white; opacity: 0.8;';
+          div.className = `cube-face-${face}`;
+          div.textContent = face;
+          cube.appendChild(div);
+        });
+
+        if (!document.getElementById('cube-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'cube-keyframes';
+          style.textContent = `
+            @keyframes rotateCube {
+              from { transform: rotateX(0deg) rotateY(0deg); }
+              to { transform: rotateX(360deg) rotateY(360deg); }
+            }
+            .cube-face-front { transform: translateZ(50px); }
+            .cube-face-back { transform: rotateY(180deg) translateZ(50px); }
+            .cube-face-right { transform: rotateY(90deg) translateZ(50px); }
+            .cube-face-left { transform: rotateY(-90deg) translateZ(50px); }
+            .cube-face-top { transform: rotateX(90deg) translateZ(50px); }
+            .cube-face-bottom { transform: rotateX(-90deg) translateZ(50px); }
+          `;
+          document.head.appendChild(style);
+        }
+
+        container.appendChild(cube);
+        this._faces = cube.querySelectorAll('div');
+        this.update(state);
+      },
+      update(state) {
+        const rgb = FLX.hexToRgb(state.color);
+        const bg = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`;
+        this._faces.forEach(f => f.style.background = bg);
+      },
+      getCode(state) {
+        return `.scene { perspective: 600px; }\n.cube {\n  position: relative;\n  transform-style: preserve-3d;\n  animation: rotate 5s infinite linear;\n}\n.face {\n  position: absolute;\n  background: ${state.color}80;\n}\n/* Face transforms */\n.front { transform: translateZ(50px); }\n.back { transform: rotateY(180deg) translateZ(50px); }\n.right { transform: rotateY(90deg) translateZ(50px); }\n.left { transform: rotateY(-90deg) translateZ(50px); }\n.top { transform: rotateX(90deg) translateZ(50px); }\n.bottom { transform: rotateX(-90deg) translateZ(50px); }`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-032: Skeleton Loading
+    // ═══════════════════════════════════════════
+    {
+      id: 'skeleton-loading',
+      name: 'Skeleton Loading',
+      description: 'Shimmer effect for loading states.',
+      category: 'CSS',
+      tags: ['css', 'loading', 'skeleton', 'animation'],
+      status: 'active',
+      number: 'FLX-032',
+      controls: [
+        { type: 'range', key: 'speed', label: 'Speed', min: 0.5, max: 3, default: 1.5, step: 0.1, unit: 's' },
+      ],
+      init(container, state) {
+        container.innerHTML = `
+          <div style="width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 12px;">
+            <div class="skeleton-el" style="width: 50px; height: 50px; border-radius: 50%;"></div>
+            <div class="skeleton-el" style="height: 16px; border-radius: 4px; width: 80%;"></div>
+            <div class="skeleton-el" style="height: 16px; border-radius: 4px; width: 60%;"></div>
+          </div>
+        `;
+        
+        if (!document.getElementById('skeleton-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'skeleton-keyframes';
+          style.textContent = `
+            @keyframes shimmer {
+              0% { background-position: -1000px 0; }
+              100% { background-position: 1000px 0; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        this._els = container.querySelectorAll('.skeleton-el');
+        this.update(state);
+      },
+      update(state) {
+        this._els.forEach(el => {
+          el.style.background = '#f6f7f8';
+          el.style.backgroundImage = 'linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)';
+          el.style.backgroundSize = '1000px 100%';
+          el.style.animation = `shimmer ${state.speed}s linear infinite forwards`;
+        });
+      },
+      getCode(state) {
+        return `.skeleton {\n  background: #f6f7f8;\n  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);\n  background-repeat: no-repeat;\n  background-size: 1000px 100%;\n  animation: shimmer ${state.speed}s infinite linear forwards;\n}\n\n@keyframes shimmer {\n  0% { background-position: -1000px 0; }\n  100% { background-position: 1000px 0; }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-033: Animated Gradient Text
+    // ═══════════════════════════════════════════
+    {
+      id: 'gradient-text',
+      name: 'Animated Gradient Text',
+      description: 'Flowing gradient on text clip.',
+      category: 'CSS',
+      tags: ['css', 'text', 'gradient', 'animation'],
+      status: 'active',
+      number: 'FLX-033',
+      controls: [
+        { type: 'range', key: 'speed', label: 'Speed', min: 1, max: 10, default: 3, unit: 's' },
+      ],
+      init(container, state) {
+        const text = document.createElement('div');
+        text.style.cssText = 'font-size: 3rem; font-weight: 900; background-size: 200% auto; background-clip: text; -webkit-background-clip: text; color: transparent;';
+        text.textContent = 'Gradient Text';
+        text.style.backgroundImage = 'linear-gradient(to right, #f83600 0%, #f9d423 50%, #f83600 100%)';
+        
+        if (!document.getElementById('gradient-text-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'gradient-text-keyframes';
+          style.textContent = `
+            @keyframes gradientTextAnim {
+              to { background-position: 200% center; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        container.appendChild(text);
+        this._text = text;
+        this.update(state);
+      },
+      update(state) {
+        this._text.style.animation = `gradientTextAnim ${state.speed}s linear infinite`;
+      },
+      getCode(state) {
+        return `.gradient-text {\n  background-image: linear-gradient(to right, #f83600 0%, #f9d423 50%, #f83600 100%);\n  background-size: 200% auto;\n  color: transparent;\n  -webkit-background-clip: text;\n  background-clip: text;\n  animation: shine ${state.speed}s linear infinite;\n}\n\n@keyframes shine {\n  to { background-position: 200% center; }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-034: Tooltip Hover
+    // ═══════════════════════════════════════════
+    {
+      id: 'tooltip-hover',
+      name: 'Tooltip Hover',
+      description: 'Pure CSS tooltips on hover.',
+      category: 'CSS',
+      tags: ['css', 'tooltip', 'hover', 'ui'],
+      status: 'active',
+      number: 'FLX-034',
+      controls: [
+        { type: 'select', key: 'position', label: 'Position', options: ['top', 'bottom', 'left', 'right'], default: 'top' },
+      ],
+      init(container, state) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-secondary';
+        btn.textContent = 'Hover me';
+        btn.style.position = 'relative';
+        
+        if (!document.getElementById('tooltip-style')) {
+          const style = document.createElement('style');
+          style.id = 'tooltip-style';
+          style.textContent = `
+            .tt-demo::after {
+              content: attr(data-tooltip);
+              position: absolute;
+              background: #333;
+              color: #fff;
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 12px;
+              white-space: nowrap;
+              opacity: 0;
+              pointer-events: none;
+              transition: opacity 0.2s;
+              z-index: 10;
+            }
+            .tt-demo:hover::after { opacity: 1; }
+            .tt-demo.pos-top::after { bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-8px); }
+            .tt-demo.pos-bottom::after { top: 100%; left: 50%; transform: translateX(-50%) translateY(8px); }
+            .tt-demo.pos-left::after { right: 100%; top: 50%; transform: translateY(-50%) translateX(-8px); }
+            .tt-demo.pos-right::after { left: 100%; top: 50%; transform: translateY(-50%) translateX(8px); }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        btn.classList.add('tt-demo');
+        btn.setAttribute('data-tooltip', 'This is a tooltip!');
+        container.appendChild(btn);
+        this._btn = btn;
+        this.update(state);
+      },
+      update(state) {
+        this._btn.classList.remove('pos-top', 'pos-bottom', 'pos-left', 'pos-right');
+        this._btn.classList.add(`pos-${state.position}`);
+      },
+      getCode(state) {
+        return `[data-tooltip] { position: relative; }\n[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  opacity: 0;\n  transition: opacity 0.2s;\n  background: #333;\n  color: #fff;\n  padding: 4px 8px;\n  border-radius: 4px;\n  pointer-events: none;\n  /* Position: ${state.position} */\n}\n[data-tooltip]:hover::after { opacity: 1; }`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-035: Morphing Shape
+    // ═══════════════════════════════════════════
+    {
+      id: 'morphing-shape',
+      name: 'Morphing Shape',
+      description: 'Animated complex border-radius.',
+      category: 'CSS',
+      tags: ['css', 'shape', 'animation', 'border-radius'],
+      status: 'active',
+      number: 'FLX-035',
+      controls: [
+        { type: 'color', key: 'color', label: 'Color', default: '#e53e6b' },
+      ],
+      init(container, state) {
+        const shape = document.createElement('div');
+        shape.style.cssText = 'width: 150px; height: 150px; transition: all 1s ease; animation: morph 5s ease-in-out infinite;';
+        
+        if (!document.getElementById('morph-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'morph-keyframes';
+          style.textContent = `
+            @keyframes morph {
+              0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+              50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+              100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        container.appendChild(shape);
+        this._shape = shape;
+        this.update(state);
+      },
+      update(state) {
+        this._shape.style.background = `linear-gradient(45deg, ${state.color}, #3b82f6)`;
+      },
+      getCode(state) {
+        return `.morph {\n  background: linear-gradient(45deg, ${state.color}, #3b82f6);\n  animation: morph 5s ease-in-out infinite;\n}\n\n@keyframes morph {\n  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }\n  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }\n  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-036: Ripple Effect Button
+    // ═══════════════════════════════════════════
+    {
+      id: 'ripple-button',
+      name: 'Ripple Effect',
+      description: 'Click ripple effect using JS & CSS.',
+      category: 'JavaScript',
+      tags: ['js', 'css', 'ripple', 'button'],
+      status: 'active',
+      number: 'FLX-036',
+      controls: [
+        { type: 'color', key: 'rippleColor', label: 'Ripple Color', default: 'rgba(255,255,255,0.7)' },
+      ],
+      init(container, state) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-primary';
+        btn.textContent = 'Click Me';
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        
+        if (!document.getElementById('ripple-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'ripple-keyframes';
+          style.textContent = `
+            .ripple-circle {
+              position: absolute;
+              border-radius: 50%;
+              transform: scale(0);
+              animation: ripple-anim 0.6s linear;
+              pointer-events: none;
+            }
+            @keyframes ripple-anim {
+              to { transform: scale(4); opacity: 0; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        btn.addEventListener('click', (e) => {
+          const circle = document.createElement('span');
+          const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+          const radius = diameter / 2;
+          
+          const rect = btn.getBoundingClientRect();
+          circle.style.width = circle.style.height = `${diameter}px`;
+          circle.style.left = `${e.clientX - rect.left - radius}px`;
+          circle.style.top = `${e.clientY - rect.top - radius}px`;
+          circle.className = 'ripple-circle';
+          circle.style.background = state.rippleColor;
+          
+          btn.appendChild(circle);
+          setTimeout(() => circle.remove(), 600);
+        });
+        
+        container.appendChild(btn);
+      },
+      update(state) {},
+      getCode(state) {
+        return `button.addEventListener('click', (e) => {\n  const circle = document.createElement('span');\n  const d = Math.max(btn.clientWidth, btn.clientHeight);\n  const r = d / 2;\n  const rect = btn.getBoundingClientRect();\n  circle.style.width = circle.style.height = \`\${d}px\`;\n  circle.style.left = \`\${e.clientX - rect.left - r}px\`;\n  circle.style.top = \`\${e.clientY - rect.top - r}px\`;\n  circle.classList.add('ripple');\n  btn.appendChild(circle);\n  setTimeout(() => circle.remove(), 600);\n});`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-037: Expanding Search Bar
+    // ═══════════════════════════════════════════
+    {
+      id: 'expanding-search',
+      name: 'Expanding Search',
+      description: 'Search input that expands on focus.',
+      category: 'CSS',
+      tags: ['css', 'input', 'search', 'animation'],
+      status: 'active',
+      number: 'FLX-037',
+      controls: [
+        { type: 'range', key: 'width', label: 'Expanded Width', min: 150, max: 400, default: 250, unit: 'px' },
+      ],
+      init(container, state) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Search...';
+        input.className = 'input';
+        input.style.transition = 'width 0.4s ease-in-out';
+        input.style.width = '120px';
+        
+        input.onfocus = () => { input.style.width = `${state.width}px`; };
+        input.onblur = () => { input.style.width = '120px'; };
+        
+        container.appendChild(input);
+        this._input = input;
+      },
+      update(state) {
+        if (document.activeElement === this._input) {
+          this._input.style.width = `${state.width}px`;
+        }
+      },
+      getCode(state) {
+        return `.search-input {\n  width: 120px;\n  transition: width 0.4s ease-in-out;\n}\n.search-input:focus {\n  width: ${state.width}px;\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-038: Hamburger Menu Animation
+    // ═══════════════════════════════════════════
+    {
+      id: 'hamburger-menu',
+      name: 'Hamburger Menu',
+      description: 'CSS-only menu icon to X transition.',
+      category: 'CSS',
+      tags: ['css', 'menu', 'animation', 'icon'],
+      status: 'active',
+      number: 'FLX-038',
+      controls: [
+        { type: 'color', key: 'color', label: 'Color', default: '#3b82f6' },
+      ],
+      init(container, state) {
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'width: 40px; height: 30px; position: relative; cursor: pointer;';
+        
+        for(let i=0; i<3; i++) {
+          const line = document.createElement('div');
+          line.className = 'hamburger-line';
+          line.style.cssText = 'position: absolute; height: 4px; width: 100%; background: var(--text-primary); border-radius: 4px; transition: all 0.3s ease;';
+          if(i===0) line.style.top = '0px';
+          if(i===1) line.style.top = '13px';
+          if(i===2) line.style.top = '26px';
+          wrapper.appendChild(line);
+        }
+        
+        let isOpen = false;
+        wrapper.onclick = () => {
+          isOpen = !isOpen;
+          const lines = wrapper.querySelectorAll('div');
+          if (isOpen) {
+            lines[0].style.transform = 'rotate(45deg)';
+            lines[0].style.top = '13px';
+            lines[1].style.opacity = '0';
+            lines[2].style.transform = 'rotate(-45deg)';
+            lines[2].style.top = '13px';
+          } else {
+            lines[0].style.transform = 'none';
+            lines[0].style.top = '0px';
+            lines[1].style.opacity = '1';
+            lines[2].style.transform = 'none';
+            lines[2].style.top = '26px';
+          }
+        };
+        
+        container.appendChild(wrapper);
+        this._lines = wrapper.querySelectorAll('div');
+        this.update(state);
+      },
+      update(state) {
+        this._lines.forEach(l => l.style.background = state.color);
+      },
+      getCode(state) {
+        return `.hamburger span {\n  transition: all 0.3s ease;\n}\n.hamburger.open span:nth-child(1) {\n  transform: rotate(45deg);\n  top: 13px;\n}\n.hamburger.open span:nth-child(2) {\n  opacity: 0;\n}\n.hamburger.open span:nth-child(3) {\n  transform: rotate(-45deg);\n  top: 13px;\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-039: Shiny Hover Effect
+    // ═══════════════════════════════════════════
+    {
+      id: 'shiny-hover',
+      name: 'Shiny Hover',
+      description: 'Glossy shine passing over an element on hover.',
+      category: 'CSS',
+      tags: ['css', 'hover', 'shine', 'effect'],
+      status: 'active',
+      number: 'FLX-039',
+      controls: [
+        { type: 'range', key: 'speed', label: 'Speed', min: 0.3, max: 2, default: 0.6, step: 0.1, unit: 's' },
+      ],
+      init(container, state) {
+        const box = document.createElement('div');
+        box.style.cssText = 'width: 200px; height: 100px; background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;';
+        box.textContent = 'Hover Me';
+        
+        if (!document.getElementById('shine-keyframes')) {
+          const style = document.createElement('style');
+          style.id = 'shine-keyframes';
+          style.textContent = `
+            .shiny-box::before {
+              content: '';
+              position: absolute;
+              top: 0; left: -100%;
+              width: 50%; height: 100%;
+              background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+              transform: skewX(-20deg);
+            }
+            .shiny-box:hover::before {
+              animation: shineAnim var(--shine-speed) ease-in-out;
+            }
+            @keyframes shineAnim {
+              100% { left: 200%; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        box.className = 'shiny-box';
+        container.appendChild(box);
+        this._box = box;
+        this.update(state);
+      },
+      update(state) {
+        this._box.style.setProperty('--shine-speed', `${state.speed}s`);
+      },
+      getCode(state) {
+        return `.card {\n  position: relative;\n  overflow: hidden;\n}\n.card::before {\n  content: '';\n  position: absolute;\n  top: 0; left: -100%;\n  width: 50%; height: 100%;\n  background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);\n  transform: skewX(-20deg);\n}\n.card:hover::before {\n  animation: shine ${state.speed}s;\n}\n@keyframes shine {\n  100% { left: 200%; }\n}`;
+      },
+      destroy() {}
+    },
+
+    // ═══════════════════════════════════════════
+    // FLX-040: Flip Card
+    // ═══════════════════════════════════════════
+    {
+      id: 'flip-card',
+      name: '3D Flip Card',
+      description: 'Card that flips on hover.',
+      category: 'CSS',
+      tags: ['css', '3d', 'flip', 'hover'],
+      status: 'active',
+      number: 'FLX-040',
+      controls: [
+        { type: 'select', key: 'direction', label: 'Direction', options: ['Y', 'X'], default: 'Y' },
+      ],
+      init(container, state) {
+        const flipContainer = document.createElement('div');
+        flipContainer.style.cssText = 'perspective: 1000px; width: 150px; height: 150px;';
+        
+        const inner = document.createElement('div');
+        inner.style.cssText = 'width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d;';
+        
+        const front = document.createElement('div');
+        front.style.cssText = 'position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: var(--surface-hover); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 12px;';
+        front.textContent = 'Front';
+        
+        const back = document.createElement('div');
+        back.style.cssText = 'position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 12px;';
+        back.textContent = 'Back';
+        
+        inner.appendChild(front);
+        inner.appendChild(back);
+        flipContainer.appendChild(inner);
+        container.appendChild(flipContainer);
+        
+        flipContainer.onmouseenter = () => {
+          inner.style.transform = `rotate${state.direction}(180deg)`;
+        };
+        flipContainer.onmouseleave = () => {
+          inner.style.transform = `rotate${state.direction}(0deg)`;
+        };
+        
+        this._back = back;
+        this.update(state);
+      },
+      update(state) {
+        this._back.style.transform = `rotate${state.direction}(180deg)`;
+      },
+      getCode(state) {
+        return `.flip-card {\n  perspective: 1000px;\n}\n.flip-card-inner {\n  transition: transform 0.6s;\n  transform-style: preserve-3d;\n}\n.flip-card:hover .flip-card-inner {\n  transform: rotate${state.direction}(180deg);\n}\n.flip-card-front, .flip-card-back {\n  backface-visibility: hidden;\n}\n.flip-card-back {\n  transform: rotate${state.direction}(180deg);\n}`;
+      },
+      destroy() {}
+    }
   ];
 
   FLX.experimentData = experiments;
