@@ -146,7 +146,7 @@
     initEasterEgg();
     FLX.initScrollReveal();
 
-    console.log('%c FLOREX.LAB v1.0 %c Ready for experiments ', 'background:#e53e6b; color:#fff; font-weight:bold; padding:4px 8px; border-radius:4px 0 0 4px;', 'background:#1a2038; color:#3b82f6; font-weight:bold; padding:4px 8px; border-radius:0 4px 4px 0;');
+    console.log('%c FLOREX.LAB v2.0 %c Ready for experiments ', 'background:#e53e6b; color:#fff; font-weight:bold; padding:4px 8px; border-radius:4px 0 0 4px;', 'background:#1a2038; color:#3b82f6; font-weight:bold; padding:4px 8px; border-radius:0 4px 4px 0;');
   }
 
   if (document.readyState === 'loading') {
